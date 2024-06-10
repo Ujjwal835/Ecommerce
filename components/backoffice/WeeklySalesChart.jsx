@@ -78,7 +78,7 @@ export default function WeeklySalesChart() {
   const [chartToDisplay, setChartToDisplay] = useState(tabs[0].type);
   return (
     <div className="bg-slate-700 p-8 rounded-lg">
-      <h2 className="text-xl font-bold">Weekly Charts</h2>
+      <h2 className="text-xl font-bold mb-4">Weekly Charts</h2>
       <div className="p-4">
         {/* Tabs */}
 
@@ -106,7 +106,7 @@ export default function WeeklySalesChart() {
         {/* Content to Display */}
         {tabs.map((tab, i) => {
           if (chartToDisplay === tab.type) {
-            return <Line options={options} data={tab.data} />;
+            return <Line key={i} options={options} data={tab.data} />;
           }
           return null;
         })}
