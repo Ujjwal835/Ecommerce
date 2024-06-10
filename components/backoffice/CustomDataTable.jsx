@@ -16,8 +16,10 @@ export default function CustomDataTable() {
     console.log(page);
   }
   return (
-    <div className="">
-      <h2 className="text-xl font-bold mb-4">Recent Orders</h2>
+    <div className="mt-8">
+      <h2 className="text-xl font-bold mb-4 text-slate-800 dark:text-slate-50 px-4">
+        Recent Orders
+      </h2>
       {/* table */}
 
       <div className="p-8">
@@ -113,11 +115,11 @@ export default function CustomDataTable() {
           >
             <span className="text-xl font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">
               Showing{" "}
-              <span className="font-semibold text-gray-50 dark:text-white">
+              <span className="font-semibold text-gray-700 dark:text-white">
                 {itemStartIndex}-{itemEndIndex}
               </span>{" "}
               of{" "}
-              <span className="font-semibold text-gray-50 dark:text-white">
+              <span className="font-semibold text-gray-700 dark:text-white">
                 {data.length}
               </span>
             </span>
@@ -126,7 +128,9 @@ export default function CustomDataTable() {
                 <button
                   onClick={() => setCurrentPage(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className="disabled:hover:bg-red-200 disabled:bg-red-400 disabled:hover:text-gray-800 disabled:text-gray-800 disabled:border-red-400 disabled:hover:border-red-200 flex items-center justify-center px-3 h-10 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  className="disabled:hover:bg-red-200 disabled:bg-red-400 disabled:hover:text-gray-800 disabled:text-gray-800 disabled:border-red-400 disabled:hover:border-red-200
+                  dark:disabled:hover:bg-red-200 dark:disabled:bg-red-400 dark:disabled:hover:text-gray-800 dark:disabled:text-gray-800 dark:disabled:border-red-400 dark:disabled:hover:border-red-200
+                  flex items-center justify-center px-3 h-10 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                 >
                   Previous
                 </button>
@@ -137,7 +141,7 @@ export default function CustomDataTable() {
                     <button
                       onClick={() => setCurrentPage(index + 1)}
                       disabled={currentPage === index + 1}
-                      className="disabled:bg-green-400  disabled:hover:bg-green-200 disabled:hover:text-gray-800 disabled:text-gray-800 disabled:border-green-400 disabled:hover:border-green-200 
+                      className="disabled:text-gray-50 disabled:bg-blue-600 disabled:border-blue-300 disabled:hover:bg-blue-800 disabled:hover:text-white dark:disabled:bg-slate-300 dark:disabled:border-slate-400 dark:disabled:text-slate-900 dark:disabled:hover:border-slate-100 dark:disabled:hover:bg-slate-300  
                        flex items-center justify-center px-3 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                     >
                       {index + 1}
@@ -150,7 +154,7 @@ export default function CustomDataTable() {
                 <button
                   onClick={() => setCurrentPage(currentPage + 1)}
                   disabled={currentPage === totalPages}
-                  className="disabled:hover:bg-red-200 disabled:bg-red-400 disabled:hover:text-gray-800 disabled:text-gray-800 disabled:border-red-400 disabled:hover:border-red-200 flex items-center justify-center px-3 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  className="disabled:hover:bg-red-200 disabled:bg-red-400 disabled:hover:text-gray-800 disabled:text-gray-800 disabled:border-red-400 disabled:hover:border-red-200 dark:disabled:hover:bg-red-200 dark:disabled:bg-red-400 dark:disabled:hover:text-gray-800 dark:disabled:text-gray-800 dark:disabled:border-red-400 dark:disabled:hover:border-red-200 flex items-center justify-center px-3 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                 >
                   Next
                 </button>
