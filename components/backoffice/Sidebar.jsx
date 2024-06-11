@@ -102,13 +102,13 @@ export default function Sidebar({ showSideBar, setShowSideBar }) {
   return (
     <div
       className={`${
-        showSideBar ? "sm:block" : "hidden lg:block"
-      } mt-20 sm:mt-0 dark:bg-slate-700 bg-white space-y-6 w-64 h-screen dark:text-slate-50 text-slate-800 fixed left-0 top-0 shadow-md`}
+        showSideBar ? "sm:block" : "hidden sm:block"
+      } mt-20 sm:mt-0 dark:bg-slate-700 bg-white space-y-6 w-64 h-screen dark:text-slate-50 text-slate-800 fixed left-0 top-0 shadow-md overflow-y-scroll`}
     >
       <Link
         href="/dashboard"
         onClick={() => setShowSideBar(false)}
-        className="px-6 py-4"
+        className="px-6 py-4 hidden md:block lg:block"
       >
         <Image src={logo} alt="logo" className="w-36" />
       </Link>
