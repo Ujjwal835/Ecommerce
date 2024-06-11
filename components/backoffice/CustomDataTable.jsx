@@ -16,14 +16,13 @@ export default function CustomDataTable() {
     console.log(page);
   }
   return (
-    <div className="mt-8">
+    <div className="mt-8 ">
       <h2 className="text-xl font-bold mb-4 text-slate-800 dark:text-slate-50 px-4">
         Recent Orders
       </h2>
       {/* table */}
 
-      <div className="p-8">
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg p-8">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
@@ -162,7 +161,7 @@ export default function CustomDataTable() {
             </ul>
           </nav>
         </div>
-      </div>
+    
     </div>
   );
 }
