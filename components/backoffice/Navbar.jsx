@@ -1,3 +1,4 @@
+"use client";
 import {
   AlignJustify,
   Bell,
@@ -17,17 +18,27 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import ThemeSwitcherBtn from "./ThemeSwitcherBtn";
+import Link from "next/link";
+import logo from "../../public/Jindal_logo_6.png";
 
 export default function Navbar({ setShowSideBar, showSideBar }) {
   return (
-    <div className="flex items-center justify-between dark:bg-slate-800 text-slate-50 bg-white h-20 px-8 py-8 fixed top-0 w-full z-50 sm:pr-[20rem]">
+    <div className="flex items-center justify-between dark:bg-slate-800 text-slate-50 bg-white h-20 px-8 py-8 fixed top-0 w-full z-50 lg:justify-end lg:pr-[20rem]">
       {/* Icon */}
       <button
         onClick={() => setShowSideBar(!showSideBar)}
-        className="text-lime-700 dark:text-lime-400"
+        className="text-lime-700 dark:text-lime-400 lg:hidden"
       >
         <AlignJustify />
       </button>
+      <Link
+        href="/dashboard"
+        onClick={() => setShowSideBar(false)}
+        className="px-6 py-4 lg:hidden"
+      >
+        <Image src={logo} alt="logo" className="w-36" />
+      </Link>
+
       {/* 3 Icons */}
       <div className="flex space-x-3">
         {/* Dark Mode */}

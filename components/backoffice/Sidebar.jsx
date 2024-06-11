@@ -102,7 +102,7 @@ export default function Sidebar({ showSideBar, setShowSideBar }) {
   return (
     <div
       className={`${
-        showSideBar ? "sm:block" : "hidden sm:block"
+        showSideBar ? "sm:block" : "hidden lg:block"
       } mt-20 sm:mt-0 dark:bg-slate-700 bg-white space-y-6 w-64 h-screen dark:text-slate-50 text-slate-800 fixed left-0 top-0 shadow-md`}
     >
       <Link
