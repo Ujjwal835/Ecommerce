@@ -1,5 +1,6 @@
 "use client";
 import ImageInput from "@/components/FormInputs/ImageInput";
+import SelectInput from "@/components/FormInputs/SelectInput";
 import SubmitButton from "@/components/FormInputs/SubmitButton";
 import TextAreaInput from "@/components/FormInputs/TextAreaInput";
 import TextInput from "@/components/FormInputs/TextInput";
@@ -12,6 +13,24 @@ import { useForm } from "react-hook-form";
 
 export default function NewCategory() {
   const router = useRouter();
+  const markets = [
+    {
+      id: 1,
+      title: "Sprouts Farmers Market",
+    },
+    {
+      id: 2,
+      title: "Cabbage Farmers Market",
+    },
+    {
+      id: 3,
+      title: "Carrots Farmers Market",
+    },
+    {
+      id: 4,
+      title: "Brocolli Farmers Market",
+    },
+  ];
   const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const {
@@ -48,6 +67,15 @@ export default function NewCategory() {
             name="title"
             register={register}
             errors={errors}
+          />
+          <SelectInput
+            label="Select Markets"
+            name="marketIds"
+            register={register}
+            errors={errors}
+            className="w-full"
+            options={markets}
+            multiple={true}
           />
           <TextAreaInput
             label="Category Description"
