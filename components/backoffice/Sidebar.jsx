@@ -5,8 +5,10 @@ import React, { useState } from "react";
 import logo from "../../public/Jindal_logo_6.png";
 import {
   Boxes,
+  Building2,
   ChevronDown,
   ChevronRight,
+  CircleDollarSign,
   ExternalLinkIcon,
   LayoutGrid,
   LayoutList,
@@ -54,9 +56,19 @@ export default function Sidebar({ showSideBar, setShowSideBar }) {
       href: "/dashboard/orders",
     },
     {
-      title: "Staff",
+      title: "Our Staff",
       icon: Users2,
       href: "/dashboard/staff",
+    },
+    {
+      title: "Jindal Community",
+      icon: Building2,
+      href: "/dashboard/community",
+    },
+    {
+      title: "Wallet",
+      icon: CircleDollarSign,
+      href: "/dashboard/wallet",
     },
     {
       title: "Settings",
@@ -103,7 +115,7 @@ export default function Sidebar({ showSideBar, setShowSideBar }) {
     <div
       className={`${
         showSideBar ? "sm:block" : "hidden sm:block"
-      } mt-20 sm:mt-0 dark:bg-slate-700 bg-white space-y-6 w-64 h-screen dark:text-slate-50 text-slate-800 fixed left-0 top-0 shadow-md overflow-y-scroll`}
+      } mt-20 sm:mt-0 dark:bg-slate-800 bg-white space-y-6 w-64 h-screen dark:text-slate-300 text-slate-800 fixed left-0 top-0 shadow-md overflow-y-scroll`}
     >
       <Link
         href="/dashboard"
@@ -139,11 +151,12 @@ export default function Sidebar({ showSideBar, setShowSideBar }) {
               </div>
             </button>
           </CollapsibleTrigger>
-          <CollapsibleContent className="rounded px-3 py-3 pl-6 bg-slate-800">
+          <CollapsibleContent className="rounded px-3 py-3 pl-6 bg-white dark:bg-slate-800">
             {catalogueLinks.map((item, index) => {
               const Icon = item.icon;
               return (
                 <Link
+                  key={index}
                   onClick={() => setShowSideBar(false)}
                   href={item.href}
                   className={
