@@ -1,9 +1,25 @@
+import PageHeader from "@/components/backoffice/PageHeader";
+import TableActions from "@/components/backoffice/TableActions";
+
 import React from "react";
 
-export default function page() {
+export default function Coupons() {
   return (
     <div>
-      <h2>coupons</h2>
+      {/* Header */}
+      <PageHeader
+        heading={"Coupons"}
+        href={"/dashboard/coupons/new"}
+        linkTitle={"Add Coupons"}
+      />
+      {/* Table Actions*/}
+      {/* Export || Search || Bulk Delete */}
+      <TableActions />
+
+      {/* table */}
+      <div className="py-6">
+        <h2>Table</h2>
+      </div>
     </div>
   );
 }

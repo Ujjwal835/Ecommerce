@@ -7,6 +7,7 @@ export default function TextInput({
   type = "text",
   className = "sm:col-span-2",
   defaultValue = "",
+  min,
 }) {
   return (
     <div className={className}>
@@ -26,6 +27,7 @@ export default function TextInput({
           autoComplete={name}
           className="block w-full rounded-md border-0 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset dark:focus:ring-slate-500 focus:ring-lime-700 sm:text-sm sm:leading-6 dark:bg-transparent dark:text-slate-100"
           placeholder={`Type the ${label.toLowerCase()}`}
+          min={type === "date" ? min : undefined}
         />
         {errors[`${name}`] && (
           <span className="text-sm text-red-600 ">{label} is required</span>

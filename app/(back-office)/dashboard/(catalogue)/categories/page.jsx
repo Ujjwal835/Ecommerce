@@ -1,7 +1,5 @@
 import PageHeader from "@/components/backoffice/PageHeader";
 import TableActions from "@/components/backoffice/TableActions";
-import { Download, Search, Trash } from "lucide-react";
-
 import React from "react";
 
 export default function page() {
