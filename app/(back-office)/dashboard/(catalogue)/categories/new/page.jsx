@@ -4,14 +4,19 @@ import SubmitButton from "@/components/FormInputs/SubmitButton";
 import TextAreaInput from "@/components/FormInputs/TextAreaInput";
 import TextInput from "@/components/FormInputs/TextInput";
 import FormHeader from "@/components/backoffice/FormHeader";
+import { makePostRequest } from "@/lib/apiRequest";
 import { generateSlug } from "@/lib/generateSlug";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function NewCategory() {
+  const router = useRouter();
   const [imageUrl, setImageUrl] = useState("");
+  const [loading, setLoading] = useState(false);
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -22,8 +27,11 @@ export default function NewCategory() {
     }
     const slug = generateSlug(data.title);
     data.slug = slug;
-    data.imageUrl=imageUrl
+    data.imageUrl = imageUrl;
     console.log(data);
+    makePostRequest(setLoading, "api/categories", data, "Category", reset);
+    setImageUrl("");
+    router.back();
   }
 
   return (
@@ -56,7 +64,7 @@ export default function NewCategory() {
         </div>
 
         <SubmitButton
-          isLoading={false}
+          isLoading={loading}
           buttonTitle="Create Category"
           loadingButtonTitle="Creating Category Please wait ..."
         />
