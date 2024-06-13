@@ -18,6 +18,7 @@ import {
   ScanSearch,
   SendToBack,
   Settings,
+  TicketSlash,
   Tractor,
   Truck,
   Users2,
@@ -93,9 +94,9 @@ export default function Sidebar({ showSideBar, setShowSideBar }) {
       href: "/dashboard/categories",
     },
     {
-      title: "Attributes",
-      icon: SendToBack,
-      href: "/dashboard/attributes",
+      title: "Banners",
+      icon: TicketSlash,
+      href: "/dashboard/banners",
     },
     {
       title: "Coupons",

@@ -5,6 +5,7 @@ import SelectInput from "@/components/FormInputs/SelectInput";
 import SubmitButton from "@/components/FormInputs/SubmitButton";
 import TextAreaInput from "@/components/FormInputs/TextAreaInput";
 import TextInput from "@/components/FormInputs/TextInput";
+import ToggleInput from "@/components/FormInputs/ToggleInput";
 import FormHeader from "@/components/backoffice/FormHeader";
 import { makePostRequest } from "@/lib/apiRequest";
 import { generateSlug } from "@/lib/generateSlug";
@@ -20,14 +21,17 @@ export default function NewProduct() {
   const {
     register,
     reset,
+    watch,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-
-  // tags start
+  } = useForm({
+    defaultValues: {
+      isActive: true,
+    },
+  });
   const [tags, setTags] = useState([]);
-
-  // tags end
+  const isActive = watch("isActive");
+  console.log(isActive);
 
   const categories = [
     {
@@ -157,6 +161,13 @@ export default function NewProduct() {
             name="description"
             register={register}
             errors={errors}
+          />
+          <ToggleInput
+            label="Publish Your Product"
+            name="isActive"
+            trueTitle="Active"
+            falseTitle="Draft"
+            register={register}
           />
         </div>
 

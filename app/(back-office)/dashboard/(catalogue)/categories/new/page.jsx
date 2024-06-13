@@ -4,6 +4,7 @@ import SelectInput from "@/components/FormInputs/SelectInput";
 import SubmitButton from "@/components/FormInputs/SubmitButton";
 import TextAreaInput from "@/components/FormInputs/TextAreaInput";
 import TextInput from "@/components/FormInputs/TextInput";
+import ToggleInput from "@/components/FormInputs/ToggleInput";
 import FormHeader from "@/components/backoffice/FormHeader";
 import { makePostRequest } from "@/lib/apiRequest";
 import { generateSlug } from "@/lib/generateSlug";
@@ -36,10 +37,16 @@ export default function NewCategory() {
   const {
     register,
     reset,
+    watch,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      isActive: true,
+    },
+  });
 
+  const isActive = watch("isActive");
   async function onSubmit(data) {
     {
       /* -id=>auto()  -title  -slug=>auto()  -description  -image */
@@ -88,6 +95,13 @@ export default function NewCategory() {
             imageUrl={imageUrl}
             setImageUrl={setImageUrl}
             endpoint="categoryImageUploader"
+          />
+          <ToggleInput
+            label="Publish Your Category"
+            name="isActive"
+            trueTitle="Active"
+            falseTitle="Draft"
+            register={register}
           />
         </div>
 

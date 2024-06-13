@@ -10,7 +10,7 @@ export default function Coupons() {
       <PageHeader
         heading={"Coupons"}
         href={"/dashboard/coupons/new"}
-        linkTitle={"Add Coupons"}
+        linkTitle={"Add Coupon"}
       />
       {/* Table Actions*/}
       {/* Export || Search || Bulk Delete */}

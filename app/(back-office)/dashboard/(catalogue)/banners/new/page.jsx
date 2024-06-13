@@ -1,16 +1,17 @@
 "use client";
+import ImageInput from "@/components/FormInputs/ImageInput";
 import SubmitButton from "@/components/FormInputs/SubmitButton";
 import TextInput from "@/components/FormInputs/TextInput";
 import ToggleInput from "@/components/FormInputs/ToggleInput";
 import FormHeader from "@/components/backoffice/FormHeader";
 import { makePostRequest } from "@/lib/apiRequest";
-import { generateCouponCode } from "@/lib/generateCouponCode";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
-export default function NewCoupons() {
+export default function NewBanner() {
   const router = useRouter();
+  const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -25,22 +26,20 @@ export default function NewCoupons() {
   });
   const isActive = watch("isActive");
 
-  const today = new Date().toISOString().split("T")[0];
-
   async function onSubmit(data) {
     {
-      /* -id=>auto()  -title -code=>auto() -expiry date   */
+      /* -id=>auto()  -title  -link  -image */
     }
-    const couponCode = generateCouponCode(data.title, data.expiryDate);
-    data.couponCode = couponCode;
+    data.imageUrl = imageUrl;
     console.log(data);
-    makePostRequest(setLoading, "api/coupons", data, "Coupon", reset);
+    makePostRequest(setLoading, "api/banners", data, "Banner", reset);
+    setImageUrl("");
     router.back();
   }
 
   return (
     <div>
-      <FormHeader title="New Coupon" />
+      <FormHeader title="New Banner" />
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -48,24 +47,26 @@ export default function NewCoupons() {
       >
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <TextInput
-            label="Coupon Title"
+            label="Banner Title"
             name="title"
             register={register}
             errors={errors}
-            className="w-full"
           />
           <TextInput
-            label="Coupon Expiry Date"
-            name="expiryDate"
-            type="date"
-            min={today}
-            // defaultValue={today}
+            label="Banner Link"
+            name="link"
+            type="url"
             register={register}
             errors={errors}
-            className="w-full"
+          />
+          <ImageInput
+            label="Banner Image"
+            imageUrl={imageUrl}
+            setImageUrl={setImageUrl}
+            endpoint="bannerImageUploader"
           />
           <ToggleInput
-            label="Publish Your Coupon"
+            label="Publish Your Banner"
             name="isActive"
             trueTitle="Active"
             falseTitle="Draft"
@@ -75,8 +76,8 @@ export default function NewCoupons() {
 
         <SubmitButton
           isLoading={loading}
-          buttonTitle="Create Coupon"
-          loadingButtonTitle="Creating Coupon Please wait ..."
+          buttonTitle="Create Banner"
+          loadingButtonTitle="Creating Banner Please wait ..."
         />
       </form>
     </div>
