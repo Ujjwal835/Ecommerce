@@ -2,10 +2,29 @@ import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
-    const { name, email, password, phone, physicalAddress, notes, isActive,code } =
-      await request.json();
+    const {
+      name,
+      email,
+      password,
+      phone,
+      physicalAddress,
+      notes,
+      isActive,
+      code,
+      dob,
+      aadharNumber,
+    } = await request.json();
     const newStaff = {
-      name, email, password, phone, physicalAddress, notes, isActive,code
+      name,
+      email,
+      password,
+      phone,
+      physicalAddress,
+      notes,
+      isActive,
+      code,
+      dob,
+      aadharNumber,
     };
     console.log(newStaff);
     return NextResponse.json(newStaff);

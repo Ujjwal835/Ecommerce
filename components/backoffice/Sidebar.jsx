@@ -59,7 +59,7 @@ export default function Sidebar({ showSideBar, setShowSideBar }) {
     {
       title: "Our Staff",
       icon: Users2,
-      href: "/dashboard/staff",
+      href: "/dashboard/staffs",
     },
     {
       title: "Jindal Community",

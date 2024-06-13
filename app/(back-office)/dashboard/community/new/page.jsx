@@ -1,19 +1,37 @@
 "use client";
+import ImageInput from "@/components/FormInputs/ImageInput";
+import QuillEditor from "@/components/FormInputs/QuillEditor";
+import SelectInput from "@/components/FormInputs/SelectInput";
 import SubmitButton from "@/components/FormInputs/SubmitButton";
 import TextAreaInput from "@/components/FormInputs/TextAreaInput";
 import TextInput from "@/components/FormInputs/TextInput";
 import ToggleInput from "@/components/FormInputs/ToggleInput";
 import FormHeader from "@/components/backoffice/FormHeader";
 import { makePostRequest } from "@/lib/apiRequest";
-import { generateUserCode } from "@/lib/generateUserCode";
-
+import { generateSlug } from "@/lib/generateSlug";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
-export default function NewFarmer() {
+export default function NewTraining() {
   const router = useRouter();
+  const categories = [
+    {
+      id: 1,
+      title: "Category 1",
+    },
+    {
+      id: 2,
+      title: "Category 2",
+    },
+    {
+      id: 3,
+      title: "Category 3",
+    },
+  ];
+  const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
+  const [content, setContent] = useState("");
   const {
     register,
     reset,
@@ -27,19 +45,24 @@ export default function NewFarmer() {
   });
 
   const isActive = watch("isActive");
-
   async function onSubmit(data) {
-    // JFM Jindal Farmer Member
-    const code = generateUserCode("JFM", data.name);
-    data.code = code;
+    {
+      /*
+       -id=>auto()  -title -author(Expert)Id -categoryId   -slug=>auto()  -description  -image -content=>richtext */
+    }
+    const slug = generateSlug(data.title);
+    data.slug = slug;
+    data.imageUrl = imageUrl;
+    data.content = content;
     console.log(data);
-    makePostRequest(setLoading, "api/farmers", data, "Farmer", reset);
+    makePostRequest(setLoading, "api/trainings", data, "Training", reset);
+    setImageUrl("");
     router.back();
   }
 
   return (
     <div>
-      <FormHeader title="New Farmer" />
+      <FormHeader title="New Training" />
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -47,66 +70,39 @@ export default function NewFarmer() {
       >
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <TextInput
-            label="Farmer's Full Name"
-            name="name"
+            label="Training Title"
+            name="title"
             register={register}
             errors={errors}
             className="w-full"
           />
-          <TextInput
-            label="Farmer's Phone"
-            name="phone"
-            type="tel"
+          <SelectInput
+            label="Select Category"
+            name="categoryId"
             register={register}
             errors={errors}
             className="w-full"
-          />
-          <TextInput
-            label="Farmer's Email Address"
-            name="email"
-            // type="email"
-            register={register}
-            errors={errors}
-            className="w-full"
-          />
-          <TextInput
-            label="Farmer's Physical Address"
-            name="physicalAddress"
-            register={register}
-            errors={errors}
-            className="w-full"
-          />
-          <TextInput
-            label="Farmer's Contact Person"
-            name="contactPerson"
-            register={register}
-            errors={errors}
-            className="w-full"
-          />
-          <TextInput
-            label="Farmer's Contact Person Phone"
-            name="contactPersonPhone"
-            type="tel"
-            register={register}
-            errors={errors}
-            className="w-full"
+            options={categories}
           />
           <TextAreaInput
-            label="Farmer's Payment Terms"
-            name="terms"
+            label="Training Description"
+            name="description"
             register={register}
             errors={errors}
           />
-          <TextAreaInput
-            label="Notes"
-            name="notes"
-            register={register}
-            errors={errors}
-            isRequired={false}
+          <ImageInput
+            label="Training Thumbnail"
+            imageUrl={imageUrl}
+            setImageUrl={setImageUrl}
+            endpoint="trainingImageUploader"
           />
-
+          <QuillEditor
+            label="Training Content"
+            value={content}
+            onChange={setContent}
+          />
           <ToggleInput
-            label="Farmer Status"
+            label="Publish Your Training"
             name="isActive"
             trueTitle="Active"
             falseTitle="Draft"
@@ -116,8 +112,8 @@ export default function NewFarmer() {
 
         <SubmitButton
           isLoading={loading}
-          buttonTitle="Create Farmer"
-          loadingButtonTitle="Creating Farmer Please wait ..."
+          buttonTitle="Create Training"
+          loadingButtonTitle="Creating Training Please wait ..."
         />
       </form>
     </div>

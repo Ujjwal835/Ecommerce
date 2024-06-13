@@ -27,12 +27,14 @@ export default function NewStaff() {
   });
 
   const isActive = watch("isActive");
-
+  const today = new Date().toISOString().split("T")[0];
   async function onSubmit(data) {
-    const code = generateUserCode("STF", data.name);
+    /* name email password phone physicaladress notes isactive dob aadhar*/
+    // JSM jindal Staff Member
+    const code = generateUserCode("JSM", data.name);
     data.code = code;
     console.log(data);
-    makePostRequest(setLoading, "api/staff", data, "Staff", reset);
+    makePostRequest(setLoading, "api/staffs", data, "Staff", reset);
     router.back();
   }
 
@@ -63,6 +65,23 @@ export default function NewStaff() {
             label="Password"
             name="password"
             type="password"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />
+          <TextInput
+            label="Date of Birth"
+            name="dob"
+            type="date"
+            register={register}
+            errors={errors}
+            className="w-full"
+            max={today}
+          />
+          <TextInput
+            label="Aadhar Number"
+            name="aadharNumber"
+            type="number"
             register={register}
             errors={errors}
             className="w-full"

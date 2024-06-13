@@ -7,8 +7,8 @@ export default function page() {
     <div>
       {/* Header */}
       <PageHeader
-        heading={"Staff"}
-        href={"/dashboard/staff/new"}
+        heading={"Staffs"}
+        href={"/dashboard/staffs/new"}
         linkTitle={"Add Staff"}
       />
       {/* Table Actions*/}
