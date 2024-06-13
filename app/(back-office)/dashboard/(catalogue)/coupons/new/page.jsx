@@ -5,12 +5,12 @@ import ToggleInput from "@/components/FormInputs/ToggleInput";
 import FormHeader from "@/components/backoffice/FormHeader";
 import { makePostRequest } from "@/lib/apiRequest";
 import { generateCouponCode } from "@/lib/generateCouponCode";
+import { generateIsoFormattedDate } from "@/lib/generateIsoFormattedDate";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function NewCoupons() {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -24,6 +24,7 @@ export default function NewCoupons() {
     },
   });
   const isActive = watch("isActive");
+  const router = useRouter();
 
   const today = new Date().toISOString().split("T")[0];
 
@@ -33,6 +34,9 @@ export default function NewCoupons() {
     }
     const couponCode = generateCouponCode(data.title, data.expiryDate);
     data.couponCode = couponCode;
+    // the expiry date formate we receive is 2024-06-12 and prisma expects them to be in iso therefore converting it
+    const isoFormattedDate = generateIsoFormattedDate(data.expiryDate);
+    data.expiryDate = isoFormattedDate;
     console.log(data);
     makePostRequest(setLoading, "api/coupons", data, "Coupon", reset);
     router.back();
