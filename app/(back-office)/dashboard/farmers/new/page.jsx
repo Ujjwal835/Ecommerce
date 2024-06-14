@@ -96,6 +96,7 @@ export default function NewFarmer() {
             name="terms"
             register={register}
             errors={errors}
+            isRequired={false}
           />
           <TextAreaInput
             label="Notes"

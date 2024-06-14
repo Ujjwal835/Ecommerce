@@ -28,7 +28,7 @@ export default function NewBanner() {
 
   async function onSubmit(data) {
     {
-      /* -id=>auto()  -title  -link  -image */
+      /* -id=>auto()  -title  -link  -image -isActive */
     }
     data.imageUrl = imageUrl;
     console.log(data);

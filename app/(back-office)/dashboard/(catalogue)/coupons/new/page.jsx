@@ -30,7 +30,7 @@ export default function NewCoupons() {
 
   async function onSubmit(data) {
     {
-      /* -id=>auto()  -title -code=>auto() -expiry date   */
+      /* -id=>auto()  -title -code=>auto() -expiry date  -isActive */
     }
     const couponCode = generateCouponCode(data.title, data.expiryDate);
     data.couponCode = couponCode;

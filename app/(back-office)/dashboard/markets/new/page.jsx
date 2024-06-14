@@ -1,5 +1,6 @@
 "use client";
 import ImageInput from "@/components/FormInputs/ImageInput";
+import SelectInput from "@/components/FormInputs/SelectInput";
 import SubmitButton from "@/components/FormInputs/SubmitButton";
 import TextAreaInput from "@/components/FormInputs/TextAreaInput";
 import TextInput from "@/components/FormInputs/TextInput";
@@ -16,6 +17,20 @@ export default function NewMarket() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [logoUrl, setLogoUrl] = useState("");
+  const categories = [
+    {
+      id: 1,
+      title: "Category 1",
+    },
+    {
+      id: 2,
+      title: "Category 2",
+    },
+    {
+      id: 3,
+      title: "Category 3",
+    },
+  ];
   const {
     register,
     reset,
@@ -59,6 +74,15 @@ export default function NewMarket() {
             register={register}
             errors={errors}
             className="w-full"
+          />
+          <SelectInput
+            label="Select Categories"
+            name="categoryIds"
+            register={register}
+            errors={errors}
+            className="w-full"
+            options={categories}
+            multiple={true}
           />
           <ImageInput
             label="Market Logo"

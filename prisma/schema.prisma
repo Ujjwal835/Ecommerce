@@ -9,20 +9,135 @@ datasource db {
 
 //title, couponCode, expiryDate, isActive
 model Coupon {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
   title      String
   couponCode String
   expiryDate DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  isActive   Boolean
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Banner {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  title     String
-  link      String
-  imageUrl  String
-  isActive  Boolean
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  title    String
+  link     String
+  imageUrl String
+  isActive Boolean
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+// Relationships
+// 1 to 1 Relation User=>Profile 1 profile that belong to 1 user and 1 user can have 1 profile
+
+// 1 to Many Relation Category=>Product  a catdgory can have multiple product but a product belong to single category
+//  Category{ products Product[]}   Product { category Category}
+
+// Many to Many Relation Market=>Category a market can have multiple category and a category can belong to multiple markets
+// Category{ markets Market[]}   Market{ categories Category[]}
+
+model Category {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  title       String
+  slug        String  @unique
+  imageUrl    String?
+  description String?
+  isActive    Boolean
+
+  products  Product[]
+  trainings Training[]
+
+  marketIds String[] @db.ObjectId
+  markets   Market[] @relation(fields: [marketIds], references: [id])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+}
+
+model Market {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  title       String
+  slug        String   @unique
+  logoUrl     String?
+  description String?
+  isActive    Boolean
+  categoryIds String[] @db.ObjectId
+
+  categories Category[] @relation(fields: [categoryIds], references: [id])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+}
+
+model Product {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  title        String
+  slug         String   @unique
+  imageUrl     String?
+  description  String?
+  isActive     Boolean
+  // isWholesale    Boolean
+  sku          String?
+  barcode      String?
+  // productCode    String?
+  // unit           String?
+  productPrice Float
+  salePrice    Float
+  // wholesalePrice Float?
+  // wholesaleQty   Int?
+  // productStock   Int?
+  // qty            Int?
+  tags         String[]
+  category     Category @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  categoryId   String   @db.ObjectId
+  farmer       Farmer   @relation(fields: [farmerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  farmerId     String   @db.ObjectId
+
+  // user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  // userId String @db.ObjectId
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+}
+
+model Farmer {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name               String
+  phone              String
+  email              String
+  physicalAddress    String?
+  contactPerson      String?
+  contactPersonPhone String?
+  terms              String?
+  notes              String?
+  isActive           Boolean
+  code               String
+
+  products Product[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+}
+
+model Training {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  title       String
+  description String?
+  imageUrl    String?
+  content     String?
+  isActive    Boolean
+  categoryId  String  @db.ObjectId
+  slug        String  @unique
+
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }

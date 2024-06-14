@@ -14,24 +14,7 @@ import { useForm } from "react-hook-form";
 
 export default function NewCategory() {
   const router = useRouter();
-  const markets = [
-    {
-      id: 1,
-      title: "Sprouts Farmers Market",
-    },
-    {
-      id: 2,
-      title: "Cabbage Farmers Market",
-    },
-    {
-      id: 3,
-      title: "Carrots Farmers Market",
-    },
-    {
-      id: 4,
-      title: "Brocolli Farmers Market",
-    },
-  ];
+  // const markets = [];
   const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const {
@@ -49,7 +32,7 @@ export default function NewCategory() {
   const isActive = watch("isActive");
   async function onSubmit(data) {
     {
-      /* -id=>auto()  -title  -slug=>auto()  -description  -image */
+      /* -id=>auto()  -title  -slug=>auto()  -description  -image -isActive */
     }
     const slug = generateSlug(data.title);
     data.slug = slug;
@@ -75,7 +58,7 @@ export default function NewCategory() {
             register={register}
             errors={errors}
           />
-          <SelectInput
+          {/* <SelectInput
             label="Select Markets"
             name="marketIds"
             register={register}
@@ -83,7 +66,7 @@ export default function NewCategory() {
             className="w-full"
             options={markets}
             multiple={true}
-          />
+          /> */}
           <TextAreaInput
             label="Category Description"
             name="description"
