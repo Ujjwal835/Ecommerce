@@ -14,6 +14,7 @@ export async function POST(request) {
       notes,
       isActive,
       code,
+      profileImageUrl,
     } = await request.json();
 
     const newFarmer = {
@@ -27,6 +28,7 @@ export async function POST(request) {
       notes,
       isActive,
       code,
+      profileImageUrl,
     };
     console.log(newFarmer);
     return NextResponse.json(newFarmer);

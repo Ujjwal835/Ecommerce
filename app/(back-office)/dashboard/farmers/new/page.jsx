@@ -1,4 +1,5 @@
 "use client";
+import ImageInput from "@/components/FormInputs/ImageInput";
 import SubmitButton from "@/components/FormInputs/SubmitButton";
 import TextAreaInput from "@/components/FormInputs/TextAreaInput";
 import TextInput from "@/components/FormInputs/TextInput";
@@ -14,6 +15,7 @@ import { useForm } from "react-hook-form";
 export default function NewFarmer() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
   const {
     register,
     reset,
@@ -34,6 +36,7 @@ export default function NewFarmer() {
     data.code = code;
     console.log(data);
     makePostRequest(setLoading, "api/farmers", data, "Farmer", reset);
+    setImageUrl("");
     router.back();
   }
 
@@ -90,6 +93,12 @@ export default function NewFarmer() {
             register={register}
             errors={errors}
             className="w-full"
+          />
+          <ImageInput
+            label="Farmer Profile Image"
+            imageUrl={imageUrl}
+            setImageUrl={setImageUrl}
+            endpoint="farmerProfileUploader"
           />
           <TextAreaInput
             label="Farmer's Payment Terms"
