@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import SubmitButton from "../FormInputs/SubmitButton";
 import TextInput from "../FormInputs/TextInput";
 
-export default function RegisterForm() {
+export default function RegisterForm({ role = "USER" }) {
   const router = useRouter();
   const {
     register,
@@ -35,7 +35,13 @@ export default function RegisterForm() {
         setLoading(false);
         toast.success("User Created Successfully");
         reset();
-        // router.push("/login");
+        // if role =user => home
+        // if role =farmer=>onboarding
+        if (role === "USER") {
+          router.push("/");
+        } else {
+          router.push(`/onboarding/${responseData.data.id}`);
+        }
       } else {
         setLoading(false);
         if (response.status === 409) {
@@ -56,6 +62,17 @@ export default function RegisterForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="">
+      {/* role */}
+      <TextInput
+        label=""
+        name="role"
+        type="hidden"
+        defaultValue={role}
+        register={register}
+        errors={errors}
+        className="sm:col-span-2 mb-3"
+      />
+
       {/* name */}
       <TextInput
         label="Full Name"
