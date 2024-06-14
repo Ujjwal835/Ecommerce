@@ -1,10 +1,10 @@
+import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
-    // const farmerData = await request.json();
-    const {
-      name,
+    /*
+    name,
       phone,
       email,
       physicalAddress,
@@ -15,21 +15,33 @@ export async function POST(request) {
       isActive,
       code,
       profileImageUrl,
-    } = await request.json();
+      products,
+      landSize,
+      mainCrop,
+      userId,
+    */
 
-    const newFarmer = {
-      name,
-      phone,
-      email,
-      physicalAddress,
-      contactPerson,
-      contactPersonPhone,
-      terms,
-      notes,
-      isActive,
-      code,
-      profileImageUrl,
-    };
+    const farmerData = await request.json();
+
+    const newFarmer = await db.FarmerProfile.create({
+      data: {
+        name: farmerData.name,
+        phone: farmerData.phone,
+        email: farmerData.email,
+        physicalAddress: farmerData?.physicalAddress,
+        contactPerson: farmerData?.contactPerson,
+        contactPersonPhone: farmerData?.contactPersonPhone,
+        landSize: parseFloat(farmerData.landSize),
+        mainCrop: farmerData.mainCrop,
+        products: farmerData.products,
+        profileImageUrl: farmerData?.imageUrl,
+        terms: farmerData?.terms,
+        notes: farmerData?.notes,
+        isActive: farmerData.isActive,
+        code: farmerData.code,
+        userId: farmerData.userId,
+      },
+    });
     console.log(newFarmer);
     return NextResponse.json(newFarmer);
   } catch (error) {

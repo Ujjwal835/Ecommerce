@@ -10,11 +10,13 @@ import { generateUserCode } from "@/lib/generateUserCode";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import ArrayItemsInput from "../FormInputs/ArrayItemsInput";
 
 export default function NewFarmerForm({ user }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
+  const [products, setProducts] = useState([]);
   const {
     register,
     reset,
@@ -34,8 +36,11 @@ export default function NewFarmerForm({ user }) {
     // JFM Jindal Farmer Member
     const code = generateUserCode("JFM", data.name);
     data.code = code;
+    data.userId = user.id;
+    data.products = products;
+    data.imageUrl = imageUrl;
     console.log(data);
-    makePostRequest(setLoading, "api/farmers", data, "Farmer", reset);
+    makePostRequest(setLoading, "api/farmers", data, "Farmer Profile", reset);
     setImageUrl("");
     router.back();
   }
@@ -90,6 +95,27 @@ export default function NewFarmerForm({ user }) {
           register={register}
           errors={errors}
           className="w-full"
+        />
+        <TextInput
+          label="What is the Size of Your Land in Acre ?"
+          name="landSize"
+          type="number"
+          register={register}
+          errors={errors}
+          className="w-full"
+        />
+        <TextInput
+          label="What is Your main crop that you Cultivate ?"
+          name="mainCrop"
+          type="text"
+          register={register}
+          errors={errors}
+          className="w-full"
+        />
+        <ArrayItemsInput
+          itemTitle="Product"
+          items={products}
+          setItems={setProducts}
         />
         <ImageInput
           label="Farmer Profile Image"
