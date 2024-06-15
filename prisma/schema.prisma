@@ -84,17 +84,17 @@ model Product {
   imageUrl     String?
   description  String?
   isActive     Boolean
-  // isWholesale    Boolean
+  isWholesale    Boolean
   sku          String?
   barcode      String?
-  // productCode    String?
-  // unit           String?
+  productCode    String?
+  unit           String?
   productPrice Float
   salePrice    Float
-  // wholesalePrice Float?
-  // wholesaleQty   Int?
-  // productStock   Int?
-  // qty            Int?
+  wholesalePrice Float?
+  wholesaleQty   Int?
+  productStock   Int?
+  qty            Int?
   tags         String[]
   category     Category @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   categoryId   String   @db.ObjectId
