@@ -94,19 +94,14 @@ export default function Sidebar({ showSideBar, setShowSideBar }) {
       href: "/dashboard/categories",
     },
     {
-      title: "Banners",
-      icon: TicketSlash,
-      href: "/dashboard/banners",
-    },
-    {
       title: "Coupons",
       icon: ScanSearch,
       href: "/dashboard/coupons",
     },
     {
-      title: "Store Sliders",
-      icon: MonitorPlay,
-      href: "/dashboard/sliders",
+      title: "Store Banners",
+      icon: TicketSlash,
+      href: "/dashboard/banners",
     },
   ];
 
@@ -152,7 +147,7 @@ export default function Sidebar({ showSideBar, setShowSideBar }) {
               </div>
             </button>
           </CollapsibleTrigger>
-          <CollapsibleContent className="rounded px-3 py-3 pl-6 bg-white dark:bg-slate-800">
+          <CollapsibleContent className="rounded px-3 py-3 pl-6 bg-white dark:bg-slate-800 dark:text-slate-300">
             {catalogueLinks.map((item, index) => {
               const Icon = item.icon;
               return (
