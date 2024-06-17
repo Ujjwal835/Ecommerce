@@ -5,6 +5,7 @@ import Image from "next/image";
 import logo from "../../public/Jindal_logo_6.png";
 import { HelpCircle, ShoppingCart, User, X } from "lucide-react";
 import ThemeSwitcherBtn from "../ui/ThemeSwitcherBtn";
+import HelpModal from "./HelpModal";
 export default function Navbar() {
   return (
     <div className="bg-white dark:bg-slate-700 shadow-lg dark:shadow-blue-400">
@@ -28,10 +29,7 @@ export default function Navbar() {
             <span>Login</span>
           </Link>
           {/* help */}
-          <button className="flex items-center space-x-1 text-green-950 dark:text-slate-100">
-            <HelpCircle />
-            <span>Help</span>
-          </button>
+          <HelpModal />
           {/* cart */}
           <Link
             href="/cart"
