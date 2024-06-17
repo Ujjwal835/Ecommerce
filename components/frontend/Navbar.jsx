@@ -8,7 +8,7 @@ import ThemeSwitcherBtn from "../ui/ThemeSwitcherBtn";
 import HelpModal from "./HelpModal";
 export default function Navbar() {
   return (
-    <div className="bg-white dark:bg-slate-700 shadow-lg dark:shadow-blue-400">
+    <div className="bg-white dark:bg-slate-700 shadow-lg dark:shadow-blue-400 mb-4">
       <div className="flex items-center justify-between py-3 max-w-7xl mx-auto px-8 gap-8">
         {/* Logo */}
         <Link className="" href="/">
