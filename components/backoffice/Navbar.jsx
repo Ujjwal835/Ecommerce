@@ -17,7 +17,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import ThemeSwitcherBtn from "./ThemeSwitcherBtn";
+import ThemeSwitcherBtn from "../ui/ThemeSwitcherBtn";
 import Link from "next/link";
 import logo from "../../public/Jindal_logo_6.png";
 
