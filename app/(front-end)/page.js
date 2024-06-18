@@ -1,4 +1,5 @@
 import CategoryList from "@/components/frontend/CategoryList";
+import CommunityTrainings from "@/components/frontend/CommunityTrainings";
 import Hero from "@/components/frontend/Hero";
 import MarketList from "@/components/frontend/MarketList";
 import Link from "next/link";
@@ -13,6 +14,7 @@ export default function Home() {
         <CategoryList />
         <CategoryList />
       </div>
+      <CommunityTrainings />
     </div>
   );
 }
