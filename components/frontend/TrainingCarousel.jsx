@@ -5,7 +5,7 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-export default function TrainingCarousel() {
+export default function TrainingCarousel({ trainings }) {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -23,7 +23,6 @@ export default function TrainingCarousel() {
       slidesToSlide: 1, // optional, default to 1.
     },
   };
-  const slides = [{}, {}, {}, {}, {}, {}, {}];
   return (
     <div className="parent">
       <Carousel
@@ -45,7 +44,7 @@ export default function TrainingCarousel() {
 
         itemClass="px-4"
       >
-        {slides.map((slide, i) => {
+        {trainings.map((training, i) => {
           return (
             <div
               className="rounded-lg mr-3 bg-slate-100 dark:bg-slate-900 overflow-hidden"
@@ -53,28 +52,28 @@ export default function TrainingCarousel() {
             >
               <Link href="#">
                 <Image
-                  src="/banners/pulses.jpg"
-                  alt="vegetables"
+                  src={training.imageUrl}
+                  alt={training.title}
                   width={556}
                   height={556}
-                  className="w-full"
+                  className="w-full h-48 object-cover rounded-2xl"
                 />
               </Link>
               <h2 className="text-center text-slate-800 my-2 dark:text-slate-200 text-xl">
-                Pulses
+                {training.title}
               </h2>
               <p className="px-4 line-clamp-3 text-slate-800 dark:text-slate-300 mb-2">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero
+                {training.description}
               </p>
-              <div className="flex justify-between items-center px-4 py-2 ">
+              <div className="flex justify-between items-center px-4 py-2 space-x-4">
                 <Link
                   href="#"
-                  className="bg-lime-900 hover:bg-lime-800 duration-300 transition-all text-slate-50 rounded-md px-4 py-2"
+                  className="bg-lime-900 hover:bg-lime-700 duration-300 transition-all text-slate-50 rounded-md px-4 py-2"
                 >
                   Read More
                 </Link>
                 <Link href="#" className="text-slate-800 dark:text-slate-100">
-                  Talk to the Consultant
+                  Talk to Consultant
                 </Link>
               </div>
             </div>

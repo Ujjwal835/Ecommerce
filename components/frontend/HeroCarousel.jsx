@@ -8,41 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import BannerSliderBtns from "./BannerSliderBtns";
 
-const banners = [
-  {
-    title: "Vegetables",
-    image: "/banners/vegetables.jpg",
-  },
-  {
-    title: "Breads",
-    image: "/banners/breads.jpg",
-  },
-  {
-    title: "Dairy",
-    image: "/banners/dairy.jpg",
-  },
-  {
-    title: "Drinks",
-    image: "/banners/drinks.jpg",
-  },
-  {
-    title: "Fruits",
-    image: "/banners/fruits.jpg",
-  },
-  {
-    title: "Grocery",
-    image: "/banners/grocery.jpg",
-  },
-  {
-    title: "Spices",
-    image: "/banners/spices.jpg",
-  },
-  {
-    title: "Pulses",
-    image: "/banners/pulses.jpg",
-  },
-];
-export default function HeroCarousel() {
+export default function HeroCarousel({ banners }) {
   const [banner, setBanner] = useState(banners[0]);
 
   const handleSlideChange = (swiper) => {
@@ -66,9 +32,9 @@ export default function HeroCarousel() {
             <div className="h-[490px] relative group flex justify-center items-center bg-pink-50/20 rounded-md">
               {/* image */}
               <div className="relative w-full h-full">
-                <Link href="/dashboard">
+                <Link href={banner.link}>
                   <Image
-                    src={banner.image}
+                    src={banner.imageUrl}
                     fill
                     className="object-cover w-full"
                     alt={banner.title}

@@ -49,6 +49,9 @@ export async function GET(request) {
       orderBy: {
         createdAt: "desc",
       },
+      include: {
+        products: true,
+      },
     });
     return NextResponse.json(categories);
   } catch (error) {
