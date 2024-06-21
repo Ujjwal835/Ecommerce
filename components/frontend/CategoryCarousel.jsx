@@ -51,7 +51,7 @@ export default function CategoryCarousel({ products }) {
               className="rounded-lg mr-3 bg-white dark:bg-slate-900 overflow-hidden border shadow"
               key={i}
             >
-              <Link href="#">
+              <Link href={`/products/${product.slug}`}>
                 <Image
                   src={product.imageUrl}
                   alt={product.title}
@@ -61,7 +61,7 @@ export default function CategoryCarousel({ products }) {
                 />
               </Link>
               <div className="px-4">
-                <Link href="#">
+                <Link href={`/products/${product.slug}`}>
                   <h2 className="text-center my-2 text-slate-800  dark:text-slate-200 font-semibold ">
                     {product.title}
                   </h2>
