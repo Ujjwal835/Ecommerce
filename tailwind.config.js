@@ -1,15 +1,11 @@
 /** @type {import('tailwindcss').Config} */
-import { withUt } from "uploadthing/tw";
-const flowbite = require("flowbite-react/tailwind");
-
-export default withUt({
+module.exports = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{js,jsx}",
-    "./components/**/*.{js,jsx}",
-    "./app/**/*.{js,jsx}",
-    "./src/**/*.{js,jsx}",
-    flowbite.content(),
+    './pages/**/*.{js,jsx}',
+    './components/**/*.{js,jsx}',
+    './app/**/*.{js,jsx}',
+    './src/**/*.{js,jsx}',
   ],
   prefix: "",
   theme: {
@@ -77,9 +73,5 @@ export default withUt({
       },
     },
   },
-  plugins: [
-    require("tailwindcss-animate"),
-    require("@tailwindcss/forms"),
-    flowbite.plugin(),
-  ],
-});
+  plugins: [require("tailwindcss-animate")],
+}
