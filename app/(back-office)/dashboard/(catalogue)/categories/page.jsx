@@ -20,7 +20,7 @@ export default async function page() {
       {/* <TableActions /> */}
 
       {/* table */}
-      <div className="py-6">
+      <div className="py-8">
         <DataTable data={categories} columns={columns} />
       </div>
     </div>
