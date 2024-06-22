@@ -1,8 +1,8 @@
 "use client";
 import { Checkbox } from "@/components/ui/checkbox";
-import SortableColumn from "@/components/DataTableColumns/SortableColumn";
-import ImageColumn from "@/components/DataTableColumns/ImageColumn";
 import DateColumn from "@/components/DataTableColumns/DateColumn";
+import ImageColumn from "@/components/DataTableColumns/ImageColumn";
+import SortableColumn from "@/components/DataTableColumns/SortableColumn";
 import ActionColumn from "@/components/DataTableColumns/ActionColumn";
 
 export const columns = [
@@ -33,13 +33,13 @@ export const columns = [
     header: ({ column }) => <SortableColumn column={column} title="Title" />,
   },
   {
-    accessorKey: "imageUrl",
-    header: "Banner Image",
-    cell: ({ row }) => <ImageColumn row={row} accessorKey="imageUrl" />,
+    accessorKey: "couponCode",
+    header: "Coupon Code",
   },
   {
-    accessorKey: "link",
-    header: "Banner Link",
+    accessorKey: "expiryDate",
+    header: "Expiry Date",
+    cell: ({ row }) => <DateColumn row={row} accessorKey="expiryDate" />,
   },
   {
     accessorKey: "isActive",
@@ -50,8 +50,9 @@ export const columns = [
     header: "Date Created",
     cell: ({ row }) => <DateColumn row={row} accessorKey="createdAt" />,
   },
+
   {
     id: "actions",
-    cell: ({ row }) => <ActionColumn row={row} title="Banner" />,
+    cell: ({ row }) => <ActionColumn row={row} title="Coupon" />,
   },
 ];
