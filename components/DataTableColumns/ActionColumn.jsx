@@ -9,10 +9,10 @@ import {
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { MoreHorizontal } from "lucide-react";
+import DeleteBtn from "../actions/DeleteBtn";
 
-export default function ActionColumn({ row, title }) {
+export default function ActionColumn({ row, title, endpoint }) {
   const isActive = row.isActive;
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -24,7 +24,9 @@ export default function ActionColumn({ row, title }) {
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Delete {title}</DropdownMenuItem>
+        <DropdownMenuItem>
+          <DeleteBtn title={title} endpoint={endpoint} />
+        </DropdownMenuItem>
         <DropdownMenuItem>Edit {title}</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

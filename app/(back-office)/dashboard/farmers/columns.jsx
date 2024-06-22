@@ -29,13 +29,17 @@ export const columns = [
     enableHiding: false,
   },
   {
-    accessorKey: "title",
-    header: ({ column }) => <SortableColumn column={column} title="Title" />,
+    accessorKey: "name",
+    header: ({ column }) => <SortableColumn column={column} title="Name" />,
   },
   {
-    accessorKey: "imageUrl",
-    header: "Category Image",
-    cell: ({ row }) => <ImageColumn row={row} accessorKey="imageUrl" />,
+    accessorKey: "profileImageUrl",
+    header: "Image",
+    cell: ({ row }) => <ImageColumn row={row} accessorKey="profileImageUrl" />,
+  },
+  {
+    accessorKey: "email",
+    header: "Email",
   },
   // {
   //   accessorKey: "description",
@@ -56,15 +60,6 @@ export const columns = [
   },
   {
     id: "actions",
-    cell: ({ row }) => {
-      const category = row.original;
-      return (
-        <ActionColumn
-          row={row}
-          title="Category"
-          endpoint={`categories/${category.id}`}
-        />
-      );
-    },
+    cell: ({ row }) => <ActionColumn row={row} title="Farmer" />,
   },
 ];

@@ -1,8 +1,12 @@
 import PageHeader from "@/components/backoffice/PageHeader";
 import TableActions from "@/components/backoffice/TableActions";
+import DataTable from "@/components/data-table-components/DataTable";
 import React from "react";
+import { columns } from "./columns";
+import { getData } from "@/lib/getData";
 
-export default function page() {
+export default async function page() {
+  const trainings = await getData("trainings");
   return (
     <div>
       {/* Header */}
@@ -13,11 +17,11 @@ export default function page() {
       />
       {/* Table Actions*/}
       {/* Export || Search || Bulk Delete */}
-      <TableActions />
+      {/* <TableActions /> */}
 
       {/* table */}
       <div className="py-6">
-        <h2>Table</h2>
+        <DataTable data={trainings} columns={columns} />
       </div>
     </div>
   );
