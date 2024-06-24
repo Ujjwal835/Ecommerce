@@ -3,9 +3,12 @@ import { NextResponse } from "next/server";
 
 export async function GET(request, { params: { id } }) {
   try {
-    const farmer = await db.FarmerProfile.findUnique({
+    const farmer = await db.User.findUnique({
       where: {
         id,
+      },
+      include: {
+        farmerProfile: true,
       },
     });
     return NextResponse.json(farmer);
@@ -23,31 +26,32 @@ export async function GET(request, { params: { id } }) {
 
 export async function DELETE(request, { params: { id } }) {
   try {
-    const existingFarmer = await db.FarmerProfile.findUnique({
+    const existingUser = await db.User.findUnique({
       where: {
         id,
       },
     });
-    if (!existingFarmer) {
+    if (!existingUser) {
       return NextResponse.json(
         {
           data: null,
-          message: "Farmer not Found",
+          message: "User not Found",
         },
         { status: 404 }
       );
     }
-    const deletedFarmer = await db.FarmerProfile.delete({
+    const deletedUser = await db.User.delete({
+      // no need to mention the role here because id is unique
       where: {
         id,
       },
     });
-    return NextResponse.json(deletedFarmer);
+    return NextResponse.json(deletedUser);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
       {
-        message: "Failed to Delete Farmer",
+        message: "Failed to Delete User",
         error,
       },
       { status: 500 }

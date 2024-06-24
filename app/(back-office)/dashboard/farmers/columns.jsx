@@ -32,14 +32,18 @@ export const columns = [
     accessorKey: "name",
     header: ({ column }) => <SortableColumn column={column} title="Name" />,
   },
-  {
-    accessorKey: "profileImageUrl",
-    header: "Image",
-    cell: ({ row }) => <ImageColumn row={row} accessorKey="profileImageUrl" />,
-  },
+  // {
+  //   accessorKey: "profileImageUrl",
+  //   header: "Image",
+  //   cell: ({ row }) => <ImageColumn row={row} accessorKey="profileImageUrl" />,
+  // },
   {
     accessorKey: "email",
     header: "Email",
+  },
+  {
+    accessorKey: "role",
+    header: "Role",
   },
   // {
   //   accessorKey: "description",
@@ -49,10 +53,10 @@ export const columns = [
   //     return <div className="line-clamp-1">{description}</div>;
   //   },
   // },
-  {
-    accessorKey: "isActive",
-    header: "Active",
-  },
+  // {
+  //   accessorKey: "isActive",
+  //   header: "Active",
+  // },
   {
     accessorKey: "createdAt",
     header: "Date Created",
