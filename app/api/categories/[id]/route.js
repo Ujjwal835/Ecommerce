@@ -57,3 +57,46 @@ export async function DELETE(request, { params: { id } }) {
     );
   }
 }
+
+export async function PUT(request, { params: { id } }) {
+  try {
+    // receive the data
+    const { title, slug, imageUrl, description, isActive } =
+      await request.json();
+    const existingCategory = await db.Category.findUnique({
+      where: {
+        id,
+      },
+    });
+    if (!existingCategory) {
+      return NextResponse.json(
+        {
+          data: null,
+          message: `Not Found`,
+        },
+        { status: 404 }
+      );
+    }
+
+    const updatedCategory = await db.Category.update({
+      where: { id },
+      data: {
+        title,
+        slug,
+        imageUrl,
+        description,
+        isActive,
+      },
+    });
+    return NextResponse.json(updatedCategory);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      {
+        message: "Failed to Update Category",
+        error,
+      },
+      { status: 500 }
+    );
+  }
+}

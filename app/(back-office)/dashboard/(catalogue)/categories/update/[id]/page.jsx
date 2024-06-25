@@ -1,9 +1,15 @@
+import FormHeader from "@/components/backoffice/FormHeader";
+import NewCategoryForm from "@/components/forms/NewCategoryForm";
+import { getData } from "@/lib/getData";
 import React from "react";
 
-export default function UpdateCategory() {
+export default async function UpdateCategory({ params: { id } }) {
+  const category = await getData(`categories/${id}`);
+  console.log(category);
   return (
     <div>
-      <h2>Update Category</h2>
+      <FormHeader title="Update Category" />
+      <NewCategoryForm updateData={category} />
     </div>
   );
 }
