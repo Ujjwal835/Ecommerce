@@ -1,9 +1,9 @@
 "use client";
 import { Checkbox } from "@/components/ui/checkbox";
 import DateColumn from "@/components/DataTableColumns/DateColumn";
-import ImageColumn from "@/components/DataTableColumns/ImageColumn";
 import SortableColumn from "@/components/DataTableColumns/SortableColumn";
 import ActionColumn from "@/components/DataTableColumns/ActionColumn";
+import ImageColumn from "@/components/DataTableColumns/ImageColumn";
 
 export const columns = [
   {
@@ -33,18 +33,18 @@ export const columns = [
     header: ({ column }) => <SortableColumn column={column} title="Title" />,
   },
   {
-    accessorKey: "imageUrl",
-    header: "Product Image",
-    cell: ({ row }) => <ImageColumn row={row} accessorKey="imageUrl" />,
+    accessorKey: "logoUrl",
+    header: "Market Image",
+    cell: ({ row }) => <ImageColumn row={row} accessorKey="logoUrl" />,
   },
-  // {
-  //   accessorKey: "description",
-  //   header: "Description",
-  //   cell: ({ row }) => {
-  //     const description = row.getValue("description");
-  //     return <div className="line-clamp-1">{description}</div>;
-  //   },
-  // },
+  {
+    accessorKey: "description",
+    header: "Description",
+    cell: ({ row }) => {
+      const description = row.getValue("description");
+      return <div className="line-clamp-2">{description}</div>;
+    },
+  },
   {
     accessorKey: "isActive",
     header: "Active",
@@ -57,13 +57,13 @@ export const columns = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const product = row.original;
+      const market = row.original;
       return (
         <ActionColumn
           row={row}
-          title="Product"
-          editEndpoint={`products/update/${product.id}`}
-          endpoint={`products/${product.id}`}
+          title="Market"
+          editEndpoint={`markets/update/${market.id}`}
+          endpoint={`markets/${market.id}`}
         />
       );
     },

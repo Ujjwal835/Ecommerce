@@ -1,7 +1,6 @@
 "use client";
 import { Checkbox } from "@/components/ui/checkbox";
 import DateColumn from "@/components/DataTableColumns/DateColumn";
-import ImageColumn from "@/components/DataTableColumns/ImageColumn";
 import SortableColumn from "@/components/DataTableColumns/SortableColumn";
 import ActionColumn from "@/components/DataTableColumns/ActionColumn";
 
@@ -32,11 +31,6 @@ export const columns = [
     accessorKey: "name",
     header: ({ column }) => <SortableColumn column={column} title="Name" />,
   },
-  // {
-  //   accessorKey: "profileImageUrl",
-  //   header: "Image",
-  //   cell: ({ row }) => <ImageColumn row={row} accessorKey="profileImageUrl" />,
-  // },
   {
     accessorKey: "email",
     header: "Email",
@@ -45,18 +39,6 @@ export const columns = [
     accessorKey: "role",
     header: "Role",
   },
-  // {
-  //   accessorKey: "description",
-  //   header: "Description",
-  //   cell: ({ row }) => {
-  //     const description = row.getValue("description");
-  //     return <div className="line-clamp-1">{description}</div>;
-  //   },
-  // },
-  // {
-  //   accessorKey: "isActive",
-  //   header: "Active",
-  // },
   {
     accessorKey: "createdAt",
     header: "Date Created",
@@ -70,6 +52,7 @@ export const columns = [
         <ActionColumn
           row={row}
           title="Farmer"
+          editEndpoint={`farmers/update/${farmer.id}`}
           endpoint={`farmers/${farmer.id}`}
         />
       );
