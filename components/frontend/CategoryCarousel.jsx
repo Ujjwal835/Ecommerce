@@ -5,6 +5,7 @@ import Link from "next/link";
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Product from "./Product";
 
 export default function CategoryCarousel({ products }) {
   const responsive = {
@@ -34,51 +35,20 @@ export default function CategoryCarousel({ products }) {
         responsive={responsive}
         autoPlay={true}
         dotListClass="custom-dot-list-style"
-        partialVisbile={true}
+        // partialVisbile={true}
+        partialVisible={true}
         ssr={true} // means to render carousel on server-side.
-        autoPlaySpeed={1000}
+        autoPlaySpeed={5000}
         keyBoardControl={true}
         customTransition="all .5"
-        transitionDuration={500}
+        transitionDuration={1000}
         containerClass="carousel-container"
         // removeArrowOnDeviceType={["tablet", "mobile"]}
 
         itemClass="px-4"
       >
         {products.map((product, i) => {
-          return (
-            <div
-              className="rounded-lg mr-3 bg-white dark:bg-slate-900 overflow-hidden border shadow"
-              key={i}
-            >
-              <Link href={`/products/${product.slug}`}>
-                <Image
-                  src={product.imageUrl}
-                  alt={product.title}
-                  width={556}
-                  height={556}
-                  className="w-full h-48 object-cover"
-                />
-              </Link>
-              <div className="px-4">
-                <Link href={`/products/${product.slug}`}>
-                  <h2 className="text-center my-2 text-slate-800  dark:text-slate-200 font-semibold ">
-                    {product.title}
-                  </h2>
-                </Link>
-                <div className="flex justify-between items-center gap-4 pb-3">
-                  <p className="text-slate-800  dark:text-slate-200">
-                    {" "}
-                    ₹ {product.salePrice}
-                  </p>
-                  <button className="flex items-center space-x-2 bg-lime-600 px-4 py-2 rounded text-white">
-                    <BaggageClaim />
-                    <span>Add</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          );
+          return <Product product={product} key={i} />;
         })}
       </Carousel>
     </div>
