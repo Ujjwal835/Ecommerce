@@ -1,9 +1,10 @@
 import React from "react";
 import CartProduct from "./CartProduct";
+import EmptyCart from "./EmptyCart";
 
 export default function CartItems({ cartItems }) {
   return (
-    <div className="col-span-8 sm:col-span-full">
+    <div className="md:col-span-8 col-span-full">
       <h2 className="py-2 mb-6 text-2xl">Your Cart</h2>
       {/* Table Header */}
       <div className="flex items-center justify-between border-b border-slate-400 text-slate-400 pb-3 font-semibold text-sm mb-4">
@@ -14,13 +15,9 @@ export default function CartItems({ cartItems }) {
       {/* Table header End */}
       {/* Table Content */}
       <div className="">
-        {cartItems.length > 0 ? (
-          cartItems.map((item, i) => {
-            return <CartProduct cartItem={item} key={i} />;
-          })
-        ) : (
-          <p>No Items</p>
-        )}
+        {cartItems.map((item, i) => {
+          return <CartProduct cartItem={item} key={i} />;
+        })}
       </div>
       {/* Table Content End */}
       {/* Coupon  */}
