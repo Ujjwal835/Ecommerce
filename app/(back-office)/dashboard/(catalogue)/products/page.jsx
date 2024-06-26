@@ -17,7 +17,7 @@ export default async function page() {
       />
       {/* Table Actions*/}
       {/* Export || Search || Bulk Delete */}
-      <TableActions />
+      {/* <TableActions /> */}
 
       {/* table */}
       <div className="py-6">

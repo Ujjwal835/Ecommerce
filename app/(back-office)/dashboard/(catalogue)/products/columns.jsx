@@ -46,6 +46,14 @@ export const columns = [
   //   },
   // },
   {
+    accessorKey: "productPrice",
+    header: "Product Price",
+  },
+  {
+    accessorKey: "salePrice",
+    header: "Sale Price",
+  },
+  {
     accessorKey: "isActive",
     header: "Active",
   },
