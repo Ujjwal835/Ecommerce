@@ -1,4 +1,4 @@
-import NewFarmerForm from "@/components/backoffice/NewFarmerForm";
+import FarmerForm from "@/components/backoffice/forms/FarmerForm";
 import { getData } from "@/lib/getData";
 import React from "react";
 
@@ -11,7 +11,7 @@ export default async function page({ params: { id } }) {
       <div className="max-w-4xl p-4 mx-auto">
         <h2>Hello {user?.name} Tell us More About Yourself</h2>
       </div>
-      <NewFarmerForm user={user} />
+      <FarmerForm user={user} />
     </div>
   );
 }

@@ -1,11 +1,11 @@
 import FormHeader from "@/components/backoffice/FormHeader";
-import NewCategoryForm from "@/components/backoffice/forms/NewCategoryForm";
+import CategoryForm from "@/components/backoffice/forms/CategoryForm";
 
 export default function NewCategory() {
   return (
     <div>
       <FormHeader title="New Category" />
-      <NewCategoryForm />
+      <CategoryForm />
     </div>
   );
 }

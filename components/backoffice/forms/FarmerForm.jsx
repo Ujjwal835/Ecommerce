@@ -4,19 +4,22 @@ import SubmitButton from "@/components/FormInputs/SubmitButton";
 import TextAreaInput from "@/components/FormInputs/TextAreaInput";
 import TextInput from "@/components/FormInputs/TextInput";
 import ToggleInput from "@/components/FormInputs/ToggleInput";
-import { makePostRequest } from "@/lib/apiRequest";
+import { makePostRequest, makePutRequest } from "@/lib/apiRequest";
 import { generateUserCode } from "@/lib/generateUserCode";
 
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import ArrayItemsInput from "../FormInputs/ArrayItemsInput";
+import ArrayItemsInput from "../../FormInputs/ArrayItemsInput";
 
-export default function NewFarmerForm({ user }) {
+export default function FarmerForm({ user, updateData = {} }) {
+  const initialImageUrl = updateData?.farmerProfile?.profileImageUrl ?? "";
+  const initialProducts = updateData?.farmerProfile?.products ?? [];
+  const id = updateData?.farmerProfile?.id ?? "";
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
-  const [products, setProducts] = useState([]);
+  const [imageUrl, setImageUrl] = useState(initialImageUrl);
+  const [products, setProducts] = useState(initialProducts);
   const {
     register,
     reset,
@@ -27,6 +30,7 @@ export default function NewFarmerForm({ user }) {
     defaultValues: {
       isActive: true,
       ...user,
+      ...updateData.farmerProfile,
     },
   });
 
@@ -36,13 +40,31 @@ export default function NewFarmerForm({ user }) {
     // JFM Jindal Farmer Member
     const code = generateUserCode("JFM", data.name);
     data.code = code;
-    data.userId = user.id;
     data.products = products;
     data.imageUrl = imageUrl;
     console.log(data);
-    makePostRequest(setLoading, "api/farmers", data, "Farmer Profile", reset);
-    setImageUrl("");
-    router.back();
+    if (id) {
+      // make put request (update)
+      console.log(id);
+      data.userId = updateData?.id;
+      makePutRequest(
+        setLoading,
+        `api/farmers/${id}`,
+        data,
+        "Farmer Profile",
+        reset
+      );
+      setImageUrl("");
+      router.back();
+      console.log("Update Request:", data);
+    } else {
+      // make post request (create)
+      console.log("2");
+      data.userId = user?.id;
+      makePostRequest(setLoading, "api/farmers", data, "Farmer Profile", reset);
+      setImageUrl("");
+      router.back();
+    }
   }
 
   return (
@@ -116,6 +138,7 @@ export default function NewFarmerForm({ user }) {
           itemTitle="Product"
           items={products}
           setItems={setProducts}
+          // defaultValues={updateData.farmerProfile.products}
         />
         <ImageInput
           label="Farmer Profile Image"
@@ -149,8 +172,10 @@ export default function NewFarmerForm({ user }) {
 
       <SubmitButton
         isLoading={loading}
-        buttonTitle="Create Farmer"
-        loadingButtonTitle="Creating Farmer Please wait ..."
+        buttonTitle={id ? "Update Farmer" : "Create Farmer"}
+        loadingButtonTitle={`${
+          id ? "Updating" : "Creating"
+        } Farmer Please wait ...`}
       />
     </form>
   );

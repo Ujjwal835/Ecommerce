@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
-export default function NewCategoryForm({ updateData = {} }) {
+export default function CategoryForm({ updateData = {} }) {
   const router = useRouter();
   const initialImageUrl = updateData?.imageUrl ?? "";
   const id = updateData?.id ?? "";

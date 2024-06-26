@@ -1,5 +1,5 @@
 import FormHeader from "@/components/backoffice/FormHeader";
-import NewCategoryForm from "@/components/backoffice/forms/NewCategoryForm";
+import CategoryForm from "@/components/backoffice/forms/CategoryForm";
 import { getData } from "@/lib/getData";
 import React from "react";
 
@@ -9,7 +9,7 @@ export default async function UpdateCategory({ params: { id } }) {
   return (
     <div>
       <FormHeader title="Update Category" />
-      <NewCategoryForm updateData={category} />
+      <CategoryForm updateData={category} />
     </div>
   );
 }
