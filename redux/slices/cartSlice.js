@@ -22,9 +22,24 @@ const cartSlice = createSlice({
         state.push({ id, title, salePrice, qty: 1, imageUrl });
       }
     },
-    removeFromCart: (state, action) => {},
-    incrementQty: (state, action) => {},
-    decrementQty: (state, action) => {},
+    removeFromCart: (state, action) => {
+      const cartId = action.payload;
+      return state.filter((item) => item.id !== cartId);
+    },
+    incrementQty: (state, action) => {
+      const cartId = action.payload;
+      const cartItem = state.find((item) => item.id === cartId);
+      if (cartItem) {
+        cartItem.qty += 1;
+      }
+    },
+    decrementQty: (state, action) => {
+      const cartId = action.payload;
+      const cartItem = state.find((item) => item.id === cartId);
+      if (cartItem && cartItem.qty > 1) {
+        cartItem.qty -= 1;
+      }
+    },
   },
 });
 

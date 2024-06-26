@@ -1,8 +1,16 @@
+"use client";
+import { removeFromCart } from "@/redux/slices/cartSlice";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import { useDispatch } from "react-redux";
 
 export default function CartProduct({ cartItem }) {
+  const dispatch = useDispatch();
+  function handleCartItemDelete(cartId) {
+    // invoke dispatch the removeFromCart Reducer
+    dispatch(removeFromCart(cartId));
+  }
   return (
     <div className="flex items-center justify-between border-b border-slate-400 pb-3 font-semibold text-sm mb-4">
       {/* Product Column Contain Image */}
@@ -31,7 +39,7 @@ export default function CartProduct({ cartItem }) {
       {/* Price Column */}
       <div className="flex items-center gap-2">
         <h4>Rs {cartItem.salePrice}</h4>
-        <button>
+        <button onClick={() => handleCartItemDelete(cartItem.id)}>
           <Trash2 className="w-5 h-5 text-red-600" />
         </button>
       </div>
