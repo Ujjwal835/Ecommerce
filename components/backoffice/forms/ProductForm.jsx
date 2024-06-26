@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form";
 
 export default function ProductForm({ categories, farmers, updateData = {} }) {
   const initialImageUrl = updateData?.imageUrl ?? "";
+  const initialTags = updateData?.tags ?? [];
   const id = updateData?.id ?? "";
   const router = useRouter();
   const [imageUrl, setImageUrl] = useState(initialImageUrl);
@@ -28,12 +29,12 @@ export default function ProductForm({ categories, farmers, updateData = {} }) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      // isActive: true,
-      // isWholesale: false,
+      isActive: true,
+      isWholesale: false,
       ...updateData,
     },
   });
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState(initialTags);
   const isActive = watch("isActive");
   const isWholesale = watch("isWholesale");
   console.log(isActive, isWholesale);

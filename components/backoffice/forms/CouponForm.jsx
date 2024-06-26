@@ -12,7 +12,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function CouponForm({ updateData = {} }) {
+  const expiryDateNormal = generateNormalDate(updateData.expiryDate);
   const id = updateData?.id ?? "";
+  updateData.expiryDate = expiryDateNormal;
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -24,9 +26,9 @@ export default function CouponForm({ updateData = {} }) {
     defaultValues: {
       isActive: true,
       ...updateData,
-      expiryDate: updateData.expiryDate
-        ? generateNormalDate(updateData.expiryDate)
-        : "",
+      // expiryDate: updateData.expiryDate
+      //   ? generateNormalDate(updateData.expiryDate)
+      //   : "",
     },
   });
   const isActive = watch("isActive");
