@@ -60,10 +60,10 @@ export default function FarmerForm({ user, updateData = {} }) {
     } else {
       // make post request (create)
       console.log("2");
-      data.userId = user?.id;
+      data.userId = user.id;
       makePostRequest(setLoading, "api/farmers", data, "Farmer Profile", reset);
       setImageUrl("");
-      router.back();
+      router.push("/login");
     }
   }
 

@@ -1,9 +1,14 @@
 import db from "@/lib/db";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
+import { v4 as uuidv4 } from "uuid";
+import base64url from "base64url";
+import { Resend } from "resend";
+import EmailTemplate from "@/components/EmailTemplate";
 
 export async function POST(request) {
   try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
     // extract the credentials
     const { name, email, password, role } = await request.json();
     // check if user already exists in the db
@@ -16,7 +21,7 @@ export async function POST(request) {
       return NextResponse.json(
         {
           data: null,
-          message: "User Already Exists",
+          message: `User with this email (${email}) Already Exists in the database`,
         },
         { status: 409 }
       );
@@ -24,11 +29,37 @@ export async function POST(request) {
     // Encrypt the password=>bcrypt
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // generating token
+    const rawToken = uuidv4();
+    console.log(rawToken);
+    // encode the token using base64url-safe format
+    const token = base64url.encode(rawToken);
+
     // create new user
     const newUser = await db.User.create({
-      data: { name, email, password: hashedPassword, role },
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+        role,
+        verificationToken: token,
+      },
     });
     console.log(newUser);
+
+    // send the email if user role == farmer
+    if (role === "FARMER") {
+      const userId = newUser.id;
+      const linkText = "Verify Account";
+      const redirectUrl = `onboarding/${userId}?token=${token}`;
+      const sendMail = await resend.emails.send({
+        from: "JindalShop <info@lifeeasyway.com>",
+        to: email,
+        subject: "Account Verification - Jindal Shop ",
+        react: EmailTemplate({ name, redirectUrl, linkText }),
+      });
+      console.log(sendMail);
+    }
     return NextResponse.json(
       {
         data: newUser,

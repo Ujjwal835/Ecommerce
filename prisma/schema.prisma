@@ -100,7 +100,7 @@ model Product {
   categoryId     String   @db.ObjectId
   user           User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId         String   @db.ObjectId
-  
+
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 }
@@ -134,15 +134,17 @@ model User {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
   name          String?
-  email         String?   @unique
+  email         String? @unique
   password      String?
-  emailVerified DateTime?
+  emailVerified Boolean @default(false)
 
   products Product[]
 
-  role UserRole @default(USER)
+  role              UserRole @default(USER)
+  verificationToken String?
 
   farmerProfile FarmerProfile?
+  profile       UserProfile?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -171,4 +173,13 @@ model FarmerProfile {
 
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+}
+
+model UserProfile {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @unique @db.ObjectId
+
+  dateOfBirth DateTime?
+  address     String?
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
