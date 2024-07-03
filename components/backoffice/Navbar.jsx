@@ -2,9 +2,6 @@
 import {
   AlignJustify,
   Bell,
-  LayoutDashboard,
-  LogOut,
-  Settings,
   X,
 } from "lucide-react";
 import Image from "next/image";
@@ -20,8 +17,10 @@ import {
 import ThemeSwitcherBtn from "../ui/ThemeSwitcherBtn";
 import Link from "next/link";
 import logo from "../../public/Jindal_logo_6.png";
+import UserAvatar from "./UserAvatar";
 
 export default function Navbar({ setShowSideBar, showSideBar }) {
+  const user = {};
   return (
     <div className="flex items-center justify-between dark:bg-slate-800 text-slate-50 bg-white h-20 px-8 py-8 fixed top-0 w-full z-50 lg:justify-end lg:pr-[20rem]">
       {/* Icon */}
@@ -141,40 +140,7 @@ export default function Navbar({ setShowSideBar, showSideBar }) {
         </DropdownMenu>
 
         {/* Account  */}
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Image
-              src="/profile.png"
-              alt="User Profile"
-              width={200}
-              height={200}
-              className="w-8 h-8 rounded-full"
-            />
-          </DropdownMenuTrigger>
-
-          <DropdownMenuContent className="px-4 py-2 pr-8">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <button className="flex items-center space-x-2">
-                <LayoutDashboard className="mr-2 h-4 w-4" />
-                <span>Dashboard</span>
-              </button>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <button className="flex items-center space-x-2">
-                <Settings className="mr-2 h-4 w-4" />
-                <span>Edit Profile</span>
-              </button>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <button className="flex items-center space-x-2">
-                <LogOut className="mr-2 h-4 w-4" />
-                <span>Logout</span>
-              </button>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <UserAvatar user={user} />
       </div>
     </div>
   );
