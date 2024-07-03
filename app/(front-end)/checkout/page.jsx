@@ -25,7 +25,7 @@ export default function page() {
   ];
   return (
     <div className="bg-slate-200 dark:bg-slate-950 min-h-screen">
-      <div className="max-w-3xl mx-auto my-6 border border-lime-600 p-6">
+      <div className="max-w-3xl mx-auto my-6 border border-slate-700 p-6 rounded-lg">
         {/* STEPS  */}
         <Steps steps={steps} />
         {/* Banner and form */}
