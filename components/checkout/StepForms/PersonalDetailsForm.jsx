@@ -3,6 +3,7 @@ import TextInput from "@/components/FormInputs/TextInput";
 import ToggleInput from "@/components/FormInputs/ToggleInput";
 import React from "react";
 import { useForm } from "react-hook-form";
+import NavButtons from "../NavButtons";
 
 export default function PersonalDetailsForm() {
   const {
@@ -52,6 +53,7 @@ export default function PersonalDetailsForm() {
           className="w-full"
         />
       </div>
+      <NavButtons />
     </form>
   );
 }

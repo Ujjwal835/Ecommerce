@@ -1,10 +1,12 @@
 "use client";
+import TextInput from "@/components/FormInputs/TextInput";
+import ToggleInput from "@/components/FormInputs/ToggleInput";
 import React from "react";
 import { useForm } from "react-hook-form";
 import NavButtons from "../NavButtons";
-import { Circle, CreditCard, HeartHandshake, Truck } from "lucide-react";
+import { Circle, Truck } from "lucide-react";
 
-export default function PaymentMethodForm() {
+export default function ShippingDetailsForm() {
   const {
     register,
     reset,
@@ -12,75 +14,118 @@ export default function PaymentMethodForm() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const paymentMethod = watch("paymentMethod");
+  const shippingCost = watch("shippingCost");
   async function processData(data) {
     console.log(data);
   }
   return (
     <form onSubmit={handleSubmit(processData)}>
       <h2 className="text-xl font-semibold mb-4 dark:text-lime-400">
-        Payment Method
+        Shipping Details
       </h2>
       <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-        {/*payment method */}
+        <TextInput
+          label="Street Address"
+          name="streetAddress"
+          register={register}
+          errors={errors}
+          className="w-full"
+        />
+        <TextInput
+          label="City"
+          name="city"
+          register={register}
+          errors={errors}
+          className="w-full"
+        />
+        <TextInput
+          label="District"
+          name="district"
+          register={register}
+          errors={errors}
+          className="w-full"
+        />
+        <TextInput
+          label="Zip Code"
+          name="zipCode"
+          register={register}
+          errors={errors}
+          className="w-full"
+        />
+        <TextInput
+          label="State"
+          name="state"
+          register={register}
+          errors={errors}
+          className="w-full"
+        />
+        <TextInput
+          label="Country"
+          name="country"
+          register={register}
+          errors={errors}
+          className="w-full"
+        />
+
+        {/* shipping cost */}
 
         <div className="col-span-full">
           <h3 className="mb-5 text-lg font-medium text-gray-900 dark:text-white">
-            Which Payment Method do you Prefer ?
+            Shipping Type ?
           </h3>
           <ul className="grid w-full gap-6 md:grid-cols-2">
             <li>
               <input
-                {...register("paymentMethod", { required: true })}
+                {...register("shippingCost", { required: true })}
                 type="radio"
-                id="cashPayment"
-                name="paymentMethod"
-                value="cash"
+                id="cheap"
+                name="shippingCost"
+                value="200"
                 className="hidden peer"
               />
               <label
-                htmlFor="cashPayment"
+                htmlFor="cheap"
                 className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
               >
                 {/* design */}
                 <div className="flex gap-2 items-center">
-                  <HeartHandshake className="w-8 h-8 ms-3 flex-shrink-0" />
+                  <Truck className="w-8 h-8 ms-3 flex-shrink-0" />
                   <div className="">
-                    <p>Cash on Delivery</p>
+                    <p>Normal Delivery</p>
+                    <p>Delivery Cost: Rs 200 </p>
                   </div>
                 </div>
                 <Circle
                   className={`w-5 h-5 ms-3 flex-shrink-0 ${
-                    paymentMethod === "cash" ? "fill-current text-blue-600" : ""
+                    shippingCost === "200" ? "fill-current text-blue-600" : ""
                   }`}
                 />
               </label>
             </li>
             <li>
               <input
-                {...register("paymentMethod", { required: true })}
+                {...register("shippingCost", { required: true })}
                 type="radio"
-                id="onlinePayment"
-                name="paymentMethod"
-                value="online"
+                id="expensive"
+                name="shippingCost"
+                value="500"
                 className="hidden peer"
               />
               <label
-                htmlFor="onlinePayment"
+                htmlFor="expensive"
                 className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
               >
                 {/* design */}
                 <div className="flex gap-2 items-center">
-                  <CreditCard className="w-8 h-8 ms-3 flex-shrink-0" />
+                  <Truck className="w-8 h-8 ms-3 flex-shrink-0" />
                   <div className="">
-                    <p>Online Payment</p>
+                    <p>Fast Delivery</p>
+                    <p>Delivery Cost: Rs 500 </p>
                   </div>
                 </div>
                 <Circle
                   className={`w-5 h-5 ms-3 flex-shrink-0 ${
-                    paymentMethod === "online"
-                      ? "fill-current text-blue-600"
-                      : ""
+                    shippingCost === "500" ? "fill-current text-blue-600" : ""
                   }`}
                 />
               </label>

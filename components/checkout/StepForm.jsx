@@ -1,11 +1,11 @@
 import React from "react";
 import PersonalDetailsForm from "./StepForms/PersonalDetailsForm";
-import ShippingDetailsForm from "./StepForms/ShippingDetailsForm copy";
+import ShippingDetailsForm from "./StepForms/ShippingDetailsForm";
 import PaymentMethodForm from "./StepForms/PaymentMethodForm.jsx";
 import OrderSummary from "./StepForms/OrderSummary";
 
 export default function StepForm() {
-  const currentStep = 1;
+  const currentStep = 2;
   function renderFormByStep(step) {
     if (step === 1) {
       return <PersonalDetailsForm />;
