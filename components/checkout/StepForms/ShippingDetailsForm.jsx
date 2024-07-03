@@ -5,18 +5,35 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import NavButtons from "../NavButtons";
 import { Circle, Truck } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setCurrentStep,
+  updateCheckoutFormData,
+} from "@/redux/slices/checkoutSlice";
 
 export default function ShippingDetailsForm() {
+  const currentStep = useSelector((store) => store.checkout.currentStep);
+  const existingFormData = useSelector(
+    (store) => store.checkout.checkoutFormData
+  );
   const {
     register,
     reset,
     watch,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      ...existingFormData,
+    },
+  });
   const shippingCost = watch("shippingCost");
+  const dispatch = useDispatch();
   async function processData(data) {
-    console.log(data);
+    // update the checkout data
+    dispatch(updateCheckoutFormData(data));
+    // update the current state
+    dispatch(setCurrentStep(currentStep + 1));
   }
   return (
     <form onSubmit={handleSubmit(processData)}>

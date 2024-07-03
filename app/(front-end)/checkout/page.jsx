@@ -6,10 +6,22 @@ import React from "react";
 
 export default function page() {
   const steps = [
-    "Personal Details",
-    "Shipping Details",
-    "Payment Method",
-    "Order Summary",
+    {
+      number: 1,
+      title: "Personal Details",
+    },
+    {
+      number: 2,
+      title: "Shipping Details",
+    },
+    {
+      number: 3,
+      title: "Payment Method",
+    },
+    {
+      number: 4,
+      title: "Order Summary",
+    },
   ];
   return (
     <div className="bg-slate-200 dark:bg-slate-950 min-h-screen">

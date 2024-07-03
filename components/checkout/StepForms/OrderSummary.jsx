@@ -5,10 +5,17 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 export default function OrderSummary() {
+  const checkoutFormData = useSelector(
+    (store) => store.checkout.checkoutFormData
+  );
   const cartItems = useSelector((store) => store.cart);
   const subTotal = cartItems.reduce((acc, currentItem) => {
     return acc + currentItem.salePrice * currentItem.qty;
   }, 0);
+
+  async function submitData() {
+    console.log(checkoutFormData);
+  }
   return (
     <div className="my-6">
       <h2 className="text-xl font-semibold mb-4 dark:text-lime-400">
@@ -47,6 +54,7 @@ export default function OrderSummary() {
       <div className="mt-4">
         <button
           type="submit"
+          onClick={submitData}
           className="inline-flex items-center px-6 py-3 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-slate-900 rounded-lg focus:ring-4 focus:ring-lime-200 dark:focus:ring-lime-900 hover:bg-slate-800 dark:bg-lime-600 dark:hover:bg-lime-700"
         >
           <span>Proceed to Payment</span>

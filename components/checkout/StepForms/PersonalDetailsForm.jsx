@@ -4,17 +4,35 @@ import ToggleInput from "@/components/FormInputs/ToggleInput";
 import React from "react";
 import { useForm } from "react-hook-form";
 import NavButtons from "../NavButtons";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setCurrentStep,
+  updateCheckoutFormData,
+} from "@/redux/slices/checkoutSlice";
 
 export default function PersonalDetailsForm() {
+  const currentStep = useSelector((store) => store.checkout.currentStep);
+  const existingFormData = useSelector(
+    (store) => store.checkout.checkoutFormData
+  );
   const {
     register,
     reset,
     watch,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      ...existingFormData,
+    },
+  });
+
+  const dispatch = useDispatch();
   async function processData(data) {
-    console.log(data);
+    // update the checkout data
+    dispatch(updateCheckoutFormData(data));
+    // update the current state
+    dispatch(setCurrentStep(currentStep + 1));
   }
   return (
     <form onSubmit={handleSubmit(processData)}>
