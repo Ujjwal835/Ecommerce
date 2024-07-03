@@ -13,8 +13,11 @@ import { LayoutDashboard, LogOut, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import { generateInitials } from "@/lib/generateInitials";
 
-export default function UserAvatar({ user }) {
+export default function UserAvatar({ user={} }) {
+  const { name, image } = user;
+  const initials = generateInitials(name);
   const router = useRouter();
   async function handleLogout() {
     await signOut();
@@ -23,17 +26,23 @@ export default function UserAvatar({ user }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Image
-          src="/profile.png"
-          alt="User Profile"
-          width={200}
-          height={200}
-          className="w-8 h-8 rounded-full"
-        />
+        {image ? (
+          <Image
+            src="/profile.png"
+            alt="User Profile"
+            width={200}
+            height={200}
+            className="w-8 h-8 rounded-full"
+          />
+        ) : (
+          <div className="w-10 h-10 rounded-full p-4 flex items-center justify-center bg-slate-900 shadow-md shadow-blue-800 border  border-blue-500">
+            {initials}
+          </div>
+        )}
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="px-4 py-2 pr-8">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>{name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <Link href="/dashboard" className="flex items-center space-x-2">
@@ -42,10 +51,13 @@ export default function UserAvatar({ user }) {
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <button className="flex items-center space-x-2">
+          <Link
+            href="/dashboard/profile"
+            className="flex items-center space-x-2"
+          >
             <Settings className="mr-2 h-4 w-4" />
             <span>Edit Profile</span>
-          </button>
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <button

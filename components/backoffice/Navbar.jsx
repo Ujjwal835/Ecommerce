@@ -1,9 +1,5 @@
 "use client";
-import {
-  AlignJustify,
-  Bell,
-  X,
-} from "lucide-react";
+import { AlignJustify, Bell, X } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import {
@@ -18,9 +14,14 @@ import ThemeSwitcherBtn from "../ui/ThemeSwitcherBtn";
 import Link from "next/link";
 import logo from "../../public/Jindal_logo_6.png";
 import UserAvatar from "./UserAvatar";
+import { useSession } from "next-auth/react";
+import Loading from "@/app/loading";
 
 export default function Navbar({ setShowSideBar, showSideBar }) {
-  const user = {};
+  const { data: session, status } = useSession();
+  if (status === "loading") {
+    return <Loading />;
+  }
   return (
     <div className="flex items-center justify-between dark:bg-slate-800 text-slate-50 bg-white h-20 px-8 py-8 fixed top-0 w-full z-50 lg:justify-end lg:pr-[20rem]">
       {/* Icon */}
@@ -140,7 +141,7 @@ export default function Navbar({ setShowSideBar, showSideBar }) {
         </DropdownMenu>
 
         {/* Account  */}
-        <UserAvatar user={user} />
+        {status === "authenticated" && <UserAvatar user={session?.user} />}
       </div>
     </div>
   );
