@@ -15,7 +15,7 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { generateInitials } from "@/lib/generateInitials";
 
-export default function UserAvatar({ user={} }) {
+export default function UserAvatar({ user = {} }) {
   const { name, image } = user;
   const initials = generateInitials(name);
   const router = useRouter();
@@ -35,7 +35,7 @@ export default function UserAvatar({ user={} }) {
             className="w-8 h-8 rounded-full"
           />
         ) : (
-          <div className="w-10 h-10 rounded-full p-4 flex items-center justify-center bg-slate-900 shadow-md shadow-blue-800 border  border-blue-500">
+          <div className="w-10 h-10 rounded-full p-4 flex items-center justify-center bg-slate-900 shadow-md dark:shadow-blue-800 border  border-blue-500 text-slate-50">
             {initials}
           </div>
         )}

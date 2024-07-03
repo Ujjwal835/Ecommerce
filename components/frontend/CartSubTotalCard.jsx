@@ -36,12 +36,14 @@ export default function CartSubTotalCard({ subTotal }) {
         <span>Rs {totalPrice}</span>
       </div>
       {/* payment */}
-      <Link
-        href="#"
-        className="bg-slate-200 text-slate-900 rounded-lg py-2 px-4 font-normal"
-      >
-        Continue to Payment
-      </Link>
+      <div className="mt-8">
+        <Link
+          href="/checkout"
+          className="bg-slate-900 dark:bg-lime-600 text-slate-50 rounded-lg py-3 px-6 font-normal"
+        >
+          Continue to Checkout
+        </Link>
+      </div>
     </div>
   );
 }
