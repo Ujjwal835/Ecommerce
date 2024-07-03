@@ -34,6 +34,9 @@ import {
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Loading from "@/app/loading";
+import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
+// import handleLogout from "@/lib/handleLogout";
 
 export default function Sidebar({ showSideBar, setShowSideBar }) {
   const { data: session, status } = useSession();
@@ -178,7 +181,11 @@ export default function Sidebar({ showSideBar, setShowSideBar }) {
     ];
     catalogueLinks = [];
   }
-
+  const router = useRouter();
+  async function handleLogout() {
+    await signOut();
+    router.push("/");
+  }
   return (
     <div
       className={`${
@@ -261,7 +268,10 @@ export default function Sidebar({ showSideBar, setShowSideBar }) {
           );
         })}
         <div className="px-6 py-2">
-          <button className="bg-lime-600 rounded-md flex items-center space-x-3 px-6 py-3">
+          <button
+            onClick={handleLogout}
+            className="bg-lime-600 rounded-md flex items-center space-x-3 px-6 py-3"
+          >
             <LogOut />
             <span>Logout</span>
           </button>

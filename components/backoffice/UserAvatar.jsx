@@ -12,6 +12,7 @@ import Image from "next/image";
 import { LayoutDashboard, LogOut, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 
 export default function UserAvatar({ user }) {
   const router = useRouter();
@@ -35,10 +36,10 @@ export default function UserAvatar({ user }) {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <button className="flex items-center space-x-2">
+          <Link href="/dashboard" className="flex items-center space-x-2">
             <LayoutDashboard className="mr-2 h-4 w-4" />
             <span>Dashboard</span>
-          </button>
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <button className="flex items-center space-x-2">
