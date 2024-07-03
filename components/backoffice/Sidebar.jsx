@@ -10,17 +10,17 @@ import {
   ChevronRight,
   CircleDollarSign,
   ExternalLinkIcon,
+  HeartHandshake,
   LayoutGrid,
   LayoutList,
   LogOut,
-  MonitorPlay,
   NotepadText,
   ScanSearch,
-  SendToBack,
   Settings,
   TicketSlash,
   Tractor,
   Truck,
+  User,
   Users2,
   Warehouse,
 } from "lucide-react";
@@ -32,10 +32,17 @@ import {
 } from "@/components/ui/collapsible";
 
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
+import Loading from "@/app/loading";
 
 export default function Sidebar({ showSideBar, setShowSideBar }) {
+  const { data: session, status } = useSession();
+  if (status === "loading") {
+    <Loading />;
+  }
+  const role = session?.user?.role;
   const pathname = usePathname();
-  const sidebarLinks = [
+  let sidebarLinks = [
     {
       title: "Customers",
       icon: Users2,
@@ -82,7 +89,7 @@ export default function Sidebar({ showSideBar, setShowSideBar }) {
       href: "/",
     },
   ];
-  const catalogueLinks = [
+  let catalogueLinks = [
     {
       title: "Products",
       icon: Boxes,
@@ -106,6 +113,71 @@ export default function Sidebar({ showSideBar, setShowSideBar }) {
   ];
 
   const [openMenu, setOpenMenu] = useState(false);
+
+  if (role === "FARMER") {
+    sidebarLinks = [
+      {
+        title: "Customers",
+        icon: Users2,
+        href: "/dashboard/customers",
+      },
+      {
+        title: "Markets",
+        icon: Warehouse,
+        href: "/dashboard/markets",
+      },
+      {
+        title: "Orders",
+        icon: Truck,
+        href: "/dashboard/orders",
+      },
+      {
+        title: "Jindal Community",
+        icon: Building2,
+        href: "/dashboard/community",
+      },
+      {
+        title: "Wallet",
+        icon: CircleDollarSign,
+        href: "/dashboard/wallet",
+      },
+      {
+        title: "Farmer Support",
+        icon: HeartHandshake,
+        href: "/dashboard/farmer-support",
+      },
+      {
+        title: "Settings",
+        icon: Settings,
+        href: "/dashboard/settings",
+      },
+      {
+        title: "Online Store",
+        icon: ExternalLinkIcon,
+        href: "/",
+      },
+    ];
+  }
+  if (role === "USER") {
+    sidebarLinks = [
+      {
+        title: "Orders",
+        icon: Truck,
+        href: "/dashboard/orders",
+      },
+      {
+        title: "Profile",
+        icon: User,
+        href: "/dashboard/profile",
+      },
+      {
+        title: "Online Store",
+        icon: ExternalLinkIcon,
+        href: "/",
+      },
+    ];
+    catalogueLinks = [];
+  }
 
   return (
     <div
@@ -133,41 +205,42 @@ export default function Sidebar({ showSideBar, setShowSideBar }) {
           <LayoutGrid />
           <span>Dashboard</span>
         </Link>
-
-        <Collapsible className="px-6 py-2">
-          <CollapsibleTrigger
-            className=""
-            onClick={() => setOpenMenu(!openMenu)}
-          >
-            <button className="flex items-center space-x-3 py-2">
-              <div className="flex items-center space-x-3">
-                <NotepadText />
-                <span>Catalogue</span>
-                {openMenu ? <ChevronDown /> : <ChevronRight />}
-              </div>
-            </button>
-          </CollapsibleTrigger>
-          <CollapsibleContent className="rounded px-3 py-3 pl-6 bg-white dark:bg-slate-800 dark:text-slate-300">
-            {catalogueLinks.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <Link
-                  key={index}
-                  onClick={() => setShowSideBar(false)}
-                  href={item.href}
-                  className={
-                    pathname === item.href
-                      ? "flex items-center space-x-3 text-lime-500 py-1 "
-                      : "flex items-center space-x-3 py-1 text-sm"
-                  }
-                >
-                  <Icon className="w-4 h-4" />
-                  <span>{item.title}</span>
-                </Link>
-              );
-            })}
-          </CollapsibleContent>
-        </Collapsible>
+        {catalogueLinks.length > 0 && (
+          <Collapsible className="px-6 py-2">
+            <CollapsibleTrigger
+              className=""
+              onClick={() => setOpenMenu(!openMenu)}
+            >
+              <button className="flex items-center space-x-3 py-2">
+                <div className="flex items-center space-x-3">
+                  <NotepadText />
+                  <span>Catalogue</span>
+                  {openMenu ? <ChevronDown /> : <ChevronRight />}
+                </div>
+              </button>
+            </CollapsibleTrigger>
+            <CollapsibleContent className="rounded px-3 py-3 pl-6 bg-white dark:bg-slate-800 dark:text-slate-300">
+              {catalogueLinks.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={index}
+                    onClick={() => setShowSideBar(false)}
+                    href={item.href}
+                    className={
+                      pathname === item.href
+                        ? "flex items-center space-x-3 text-lime-500 py-1 "
+                        : "flex items-center space-x-3 py-1 text-sm"
+                    }
+                  >
+                    <Icon className="w-4 h-4" />
+                    <span>{item.title}</span>
+                  </Link>
+                );
+              })}
+            </CollapsibleContent>
+          </Collapsible>
+        )}
 
         {sidebarLinks.map((item, index) => {
           const Icon = item.icon;
