@@ -19,7 +19,7 @@ export default function NavButtons() {
         className="inline-flex items-center px-6 py-3 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-slate-900 rounded-lg focus:ring-4 focus:ring-lime-200 dark:focus:ring-lime-900 hover:bg-slate-800 dark:bg-lime-600 dark:hover:bg-lime-700"
       >
         <span>Next</span>
-        <ChevronRight className="w-5 h-5 mr-2" />
+        <ChevronRight className="w-5 h-5 ml-2" />
       </button>
     </div>
   );
