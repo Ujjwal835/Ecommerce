@@ -196,8 +196,8 @@ model UserProfile {
 }
 
 model Order {
-  id            String @id @default(auto()) @map("_id") @db.ObjectId
-  userId        String @db.ObjectId
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String  @db.ObjectId
   // Personal Details
   firstName     String
   lastName      String
@@ -211,6 +211,7 @@ model Order {
   state         String
   country       String
   shippingCost  Float
+  orderNumber   String?
   // Payment Method
   paymentMethod String
 
@@ -230,16 +231,15 @@ model Order {
 // remove ondelete cascade from the above order as per lataest
 
 model OrderItem {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  orderId     String   @db.ObjectId
-  productId   String   @db.ObjectId
-  quantity    Int
-  price       Float
-  imageUrl    String?
-  title       String?
-  orderNumber String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  order       Order    @relation(fields: [orderId], references: [id])
-  product     Product  @relation(fields: [productId], references: [id])
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  orderId   String   @db.ObjectId
+  productId String   @db.ObjectId
+  quantity  Int
+  price     Float
+  imageUrl  String?
+  title     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  order     Order    @relation(fields: [orderId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
 }

@@ -36,8 +36,8 @@ export default async function page({ params: { id } }) {
                     We received your order!
                   </h1>
                   <p className="mt-2 text-sm font-normal text-gray-600 dark:text-slate-300">
-                    Your order #{order.orderNumber} is completed and ready
-                    to ship
+                    Your order #{order.orderNumber} is completed and ready to
+                    ship
                   </p>
                 </div>
                 {/* shipping address and payment info */}

@@ -50,6 +50,7 @@ export async function POST(request) {
         country,
         shippingCost: parseFloat(shippingCost),
         paymentMethod,
+        orderNumber: generateOrderNumber(8),
       },
     });
 
@@ -64,7 +65,6 @@ export async function POST(request) {
         orderId: newOrder.id,
         imageUrl: item.imageUrl,
         title: item.title,
-        orderNumber: generateOrderNumber(8),
       })),
     });
     console.log(newOrder, newOrderItems);
