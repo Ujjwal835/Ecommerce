@@ -18,6 +18,7 @@ import { generateInitials } from "@/lib/generateInitials";
 export default function UserAvatar({ user = {} }) {
   const { name, image } = user;
   const initials = generateInitials(name);
+  const role = user?.role;
   const router = useRouter();
   async function handleLogout() {
     await signOut();
@@ -59,6 +60,17 @@ export default function UserAvatar({ user = {} }) {
             <span>Edit Profile</span>
           </Link>
         </DropdownMenuItem>
+        {role === "USER" && (
+          <DropdownMenuItem>
+            <Link
+              href="/dashboard/orders"
+              className="flex items-center space-x-2"
+            >
+              <Settings className="mr-2 h-4 w-4" />
+              <span>My Orders</span>
+            </Link>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem>
           <button
             onClick={handleLogout}

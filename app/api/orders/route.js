@@ -1,4 +1,5 @@
 import db from "@/lib/db";
+import { generateOrderNumber } from "@/lib/generateOrderNumber";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
@@ -52,6 +53,8 @@ export async function POST(request) {
       },
     });
 
+    // create orderNumber
+
     // create orderItems and associate with this order
     const newOrderItems = await db.OrderItem.createMany({
       data: orderItems.map((item) => ({
@@ -59,6 +62,9 @@ export async function POST(request) {
         quantity: parseInt(item.qty),
         price: parseFloat(item.salePrice),
         orderId: newOrder.id,
+        imageUrl: item.imageUrl,
+        title: item.title,
+        orderNumber: generateOrderNumber(8),
       })),
     });
     console.log(newOrder, newOrderItems);
@@ -80,6 +86,9 @@ export async function GET(request) {
     const orders = await db.Order.findMany({
       orderBy: {
         createdAt: "desc",
+      },
+      include: {
+        orderItems: true,
       },
     });
     return NextResponse.json(orders);
