@@ -9,8 +9,11 @@ import {
   setCurrentStep,
   updateCheckoutFormData,
 } from "@/redux/slices/checkoutSlice";
+import { useSession } from "next-auth/react";
 
 export default function PersonalDetailsForm() {
+  const { data: session, status } = useSession();
+  const userId = session?.user?.id;
   const currentStep = useSelector((store) => store.checkout.currentStep);
   const existingFormData = useSelector(
     (store) => store.checkout.checkoutFormData
@@ -29,6 +32,7 @@ export default function PersonalDetailsForm() {
 
   const dispatch = useDispatch();
   async function processData(data) {
+    data.userId = userId;
     // update the checkout data
     dispatch(updateCheckoutFormData(data));
     // update the current state
