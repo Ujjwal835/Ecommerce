@@ -16,7 +16,7 @@ export async function GET(request, { params: { id } }) {
     console.log(error);
     return NextResponse.json(
       {
-        message: "Failed to Fetch Order",
+        message: "Failed to Fetch Orders",
         error,
       },
       { status: 500 }
@@ -60,49 +60,31 @@ export async function DELETE(request, { params: { id } }) {
 
 // export async function PUT(request, { params: { id } }) {
 //   try {
-//     // receive the data
-//     const {
-//       title,
-//       categoryId,
-//       description,
-//       imageUrl,
-//       content,
-//       isActive,
-//       slug,
-//     } = await request.json();
-//     const existingTraining = await db.Training.findUnique({
+//     const existingOrder = await db.Order.findUnique({
 //       where: {
 //         id,
 //       },
 //     });
-//     if (!existingTraining) {
+//     if (!existingOrder) {
 //       return NextResponse.json(
 //         {
 //           data: null,
-//           message: `Not Found`,
+//           message: "Order not Found",
 //         },
 //         { status: 404 }
 //       );
 //     }
-
-//     const updatedTraining = await db.Training.update({
-//       where: { id },
-//       data: {
-//         title,
-//         categoryId,
-//         description,
-//         imageUrl,
-//         content,
-//         isActive,
-//         slug,
+//     const deletedOrder = await db.Order.delete({
+//       where: {
+//         id,
 //       },
 //     });
-//     return NextResponse.json(updatedTraining);
+//     return NextResponse.json(deletedOrder);
 //   } catch (error) {
 //     console.log(error);
 //     return NextResponse.json(
 //       {
-//         message: "Failed to Update Training",
+//         message: "Failed to Delete Order",
 //         error,
 //       },
 //       { status: 500 }

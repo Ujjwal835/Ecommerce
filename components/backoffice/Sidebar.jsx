@@ -67,6 +67,11 @@ export default function Sidebar({ showSideBar, setShowSideBar }) {
       href: "/dashboard/orders",
     },
     {
+      title: "Sales",
+      icon: Truck,
+      href: "/dashboard/sales",
+    },
+    {
       title: "Our Staff",
       icon: Users2,
       href: "/dashboard/staffs",
@@ -135,6 +140,11 @@ export default function Sidebar({ showSideBar, setShowSideBar }) {
         href: "/dashboard/orders",
       },
       {
+        title: "Sales",
+        icon: Truck,
+        href: "/dashboard/sales",
+      },
+      {
         title: "Jindal Community",
         icon: Building2,
         href: "/dashboard/community",
@@ -164,7 +174,7 @@ export default function Sidebar({ showSideBar, setShowSideBar }) {
   if (role === "USER") {
     sidebarLinks = [
       {
-        title: "Orders",
+        title: "My Orders",
         icon: Truck,
         href: "/dashboard/orders",
       },

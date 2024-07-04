@@ -5,20 +5,6 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
   try {
     const { checkoutFormData, orderItems } = await request.json();
-    // const existingTraining = await db.Training.findUnique({
-    //   where: {
-    //     slug,
-    //   },
-    // });
-    // if (existingTraining) {
-    //   return NextResponse.json(
-    //     {
-    //       data: null,
-    //       message: "Training with that Name Already Exists",
-    //     },
-    //     { status: 409 }
-    //   );
-    // }
     const {
       city,
       country,
