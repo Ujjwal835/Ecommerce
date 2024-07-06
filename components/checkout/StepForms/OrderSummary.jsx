@@ -31,8 +31,7 @@ export default function OrderSummary() {
       orderItems: cartItems,
       checkoutFormData,
     };
-    // makePostRequest(setLoading, "api/orders", data, "Order");
-    // console.log(combinedData);
+    console.log(data.orderItems);
     try {
       setLoading(true);
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;

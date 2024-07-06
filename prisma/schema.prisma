@@ -102,6 +102,7 @@ model Product {
   userId         String   @db.ObjectId
 
   orderItems OrderItem[]
+  sales      Sale[]
 
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
@@ -159,6 +160,7 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  sales     Sale[]
 }
 
 model FarmerProfile {
@@ -219,6 +221,7 @@ model Order {
 
   // order Items
   orderItems OrderItem[]
+  sales      Sale[]
 
   // status
   orderStatus OrderStatus @default(PROCESSING)
@@ -234,6 +237,7 @@ model OrderItem {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   orderId   String   @db.ObjectId
   productId String   @db.ObjectId
+  vendorId  String   @db.ObjectId
   quantity  Int
   price     Float
   imageUrl  String?
@@ -242,4 +246,22 @@ model OrderItem {
   updatedAt DateTime @updatedAt
   order     Order    @relation(fields: [orderId], references: [id])
   product   Product  @relation(fields: [productId], references: [id])
+}
+
+model Sale {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  orderId      String   @db.ObjectId
+  productId    String   @db.ObjectId
+  vendorId     String   @db.ObjectId
+  total        Float
+  productTitle String
+  productImage String
+  productPrice Float
+  productQty   Int
+  date         DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  order        Order    @relation(fields: [orderId], references: [id])
+  product      Product  @relation(fields: [productId], references: [id])
+  vendor       User     @relation(fields: [vendorId], references: [id])
 }

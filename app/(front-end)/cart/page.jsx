@@ -13,6 +13,7 @@ export default function Cart() {
   }, 0);
 
   console.log(subTotal);
+  console.log(cartItems);
   return (
     <div>
       <Breadcrumb />

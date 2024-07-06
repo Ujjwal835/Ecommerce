@@ -14,7 +14,13 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const { id, title, salePrice, imageUrl } = action.payload;
+      const {
+        id,
+        title,
+        salePrice,
+        imageUrl,
+        userId: vendorId,
+      } = action.payload;
       // check if item already exist in the cart
       const existingItem = state.find((item) => item.id === id);
       if (existingItem) {
@@ -22,7 +28,7 @@ const cartSlice = createSlice({
         existingItem.qty += 1;
       } else {
         // if item dont exist add to cart
-        const newItem = { id, title, salePrice, qty: 1, imageUrl };
+        const newItem = { id, title, salePrice, qty: 1, imageUrl, vendorId };
         state.push(newItem);
         // update local storage with the new state
         if (typeof window !== "undefined") {

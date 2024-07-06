@@ -16,7 +16,7 @@ export async function GET(request, { params: { id } }) {
     console.log(error);
     return NextResponse.json(
       {
-        message: "Failed to Fetch Orders",
+        message: "Failed to Fetch an Order",
         error,
       },
       { status: 500 }
