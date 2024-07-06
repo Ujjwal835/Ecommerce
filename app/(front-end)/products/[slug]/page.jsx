@@ -7,7 +7,9 @@ import Link from "next/link";
 import React from "react";
 
 export default async function ProductDetailPage({ params: { slug } }) {
-  const category = await getData("categories/66743790b09a2a8924fad144");
+  const product = await getData(`products/product/${slug}`);
+  const category = await getData(`categories/${product.categoryId}`);
+
   return (
     <div>
       {/* 1st layer bread crumbs */}
@@ -17,8 +19,8 @@ export default async function ProductDetailPage({ params: { slug } }) {
         {/* image first column */}
         <div className="col-span-3">
           <Image
-            src="/vegetables.jpg"
-            alt="vegetables"
+            src={product.imageUrl}
+            alt={product.title}
             width={556}
             height={556}
             className="w-full"
@@ -28,32 +30,40 @@ export default async function ProductDetailPage({ params: { slug } }) {
         <div className="col-span-6">
           {/* title and Share button */}
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl lg:text-3xl font-semibold">Vegetables</h2>
+            <h2 className="text-xl lg:text-3xl font-semibold">
+              {product.title}
+            </h2>
             <button>
               <Share2 />
             </button>
           </div>
           {/* Description Sku Stock */}
           <div className="border-b border-gray-500">
-            <p className="py-2 ">
-              Fresh vegetables. Delicious to Eat. Enjoy Hot Serving meal
-            </p>
+            <p className="py-2 ">{product.description}</p>
             <div className="flex items-center gap-8 mb-4">
-              <p>SKU : 3233232</p>
+              <p>SKU : {product.sku}</p>
               <p className="bg-lime-200 py-1.5 px-4 rounded-full text-slate-900">
-                <b>Stock</b> : 50
+                <b>Stock</b> : {product.productStock}
               </p>
             </div>
           </div>
           {/* Price and Discount */}
           <div className="flex items-center gap-4 pt-4 justify-between border-b border-gray-500 pb-4">
             <div className="flex items-center gap-4 ">
-              <h4 className="text-2xl">Rs 49</h4>
-              <del className="text-slate-400 text-sm">Rs 55</del>
+              <h4 className="text-2xl">Rs {product.salePrice}</h4>
+              <del className="text-slate-400 text-sm">
+                Rs {product.productPrice}
+              </del>
             </div>
             <p className="flex items-center">
               <Tag className="w-5 h-5 text-slate-400 me-2" />
-              <span>Save 50% right now</span>
+              <span>
+                Save{" "}
+                {((product.productPrice - product.salePrice) * 100) /
+                  product.productPrice}
+                % right now
+              </span>
+              {/* {((product.productPrice-product.salePrice)*100)/(product.productPrice)} */}
             </p>
           </div>
           {/* Count Increase and Add to cart button */}
