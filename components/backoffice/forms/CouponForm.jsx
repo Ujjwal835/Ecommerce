@@ -1,4 +1,5 @@
 "use client";
+import Loading from "@/app/loading";
 import SubmitButton from "@/components/FormInputs/SubmitButton";
 import TextInput from "@/components/FormInputs/TextInput";
 import ToggleInput from "@/components/FormInputs/ToggleInput";
@@ -7,11 +8,17 @@ import { makePostRequest, makePutRequest } from "@/lib/apiRequest";
 import { generateCouponCode } from "@/lib/generateCouponCode";
 import { generateIsoFormattedDate } from "@/lib/generateIsoFormattedDate";
 import { generateNormalDate } from "@/lib/generateNormalDate";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function CouponForm({ updateData = {} }) {
+  const { data: session, status } = useSession();
+  if (status === "loading") {
+    return <Loading />;
+  }
+  const vendorId = session?.user?.id;
   const expiryDateNormal = generateNormalDate(updateData.expiryDate);
   const id = updateData?.id ?? "";
   updateData.expiryDate = expiryDateNormal;
@@ -40,6 +47,7 @@ export default function CouponForm({ updateData = {} }) {
     {
       /* -id=>auto()  -title -code=>auto() -expiry date  -isActive */
     }
+    data.vendorId = vendorId;
     const couponCode = generateCouponCode(data.title, data.expiryDate);
     data.couponCode = couponCode;
     // the expiry date formate we receive is 2024-06-12 and prisma expects them to be in iso therefore converting it

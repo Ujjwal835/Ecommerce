@@ -170,6 +170,18 @@ export default function Sidebar({ showSideBar, setShowSideBar }) {
         href: "/",
       },
     ];
+    catalogueLinks = [
+      {
+        title: "Products",
+        icon: Boxes,
+        href: "/dashboard/products",
+      },
+      {
+        title: "Coupons",
+        icon: ScanSearch,
+        href: "/dashboard/coupons",
+      },
+    ];
   }
   if (role === "USER") {
     sidebarLinks = [
