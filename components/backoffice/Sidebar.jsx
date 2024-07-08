@@ -135,11 +135,6 @@ export default function Sidebar({ showSideBar, setShowSideBar }) {
         href: "/dashboard/markets",
       },
       {
-        title: "Orders",
-        icon: Truck,
-        href: "/dashboard/orders",
-      },
-      {
         title: "Sales",
         icon: Truck,
         href: "/dashboard/sales",

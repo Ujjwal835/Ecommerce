@@ -16,11 +16,17 @@ export default async function Coupons() {
 
   // fetch all the sales and thenm filter by vendorid to get sales for that vendor
 
-  const farmerSales = allSales.filter((sale) => sale.vendorId === "667434c4b09a2a8924fad13d");
+  const farmerSales = allSales.filter((sale) => sale.vendorId === id);
   // fetch orderid and get the details like customer name,email,phone, orderno
 
   return (
     <div>
+      {/* Header */}
+      {/* <PageHeader
+        heading={"Coupons"}
+        href={"/dashboard/coupons/new"}
+        linkTitle={"Add Coupon"}
+      /> */}
       {/* table */}
       <div className="py-6">
         {role === "ADMIN" ? (
